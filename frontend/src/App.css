@@ -257,7 +257,7 @@ input:focus, select:focus {
 .admin-dashboard table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin: 20px auto;
 }
 
 .admin-dashboard table, th, td {
