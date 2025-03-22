@@ -529,13 +529,6 @@ input:focus, select:focus {
   align-items: center;
 }
 
-.student-dashboard .camera-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures the video fills the container */
-  background-color: black; /* Fallback background color */
-}
-
 .student-dashboard .qr-reader {
   position: absolute;
   top: 0;

@@ -12,7 +12,6 @@ const StudentDashboard = () => {
   const [cameraStarted, setCameraStarted] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
-  const videoRef = useRef(null);
   const mediaStreamRef = useRef(null);
 
   // Check Camera permissions and availability
@@ -163,9 +162,6 @@ const StudentDashboard = () => {
       console.log("Starting camera...");
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       mediaStreamRef.current = stream; // Store the stream to stop it later
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
       setCameraStarted(true); // Start camera feed
       console.log("Camera started successfully.");
     } catch (error) {
@@ -180,9 +176,6 @@ const StudentDashboard = () => {
       const tracks = mediaStreamRef.current.getTracks();
       tracks.forEach((track) => track.stop()); // Stop all tracks
       mediaStreamRef.current = null; // Clear the media stream reference
-    }
-    if (videoRef.current) {
-      videoRef.current.srcObject = null; // Clear the video source
     }
     setCameraStarted(false); // Stop camera feed
     console.log("Camera stopped.");
@@ -221,15 +214,6 @@ const StudentDashboard = () => {
       {cameraStarted && (
         <div className="camera-container">
           <h3 className="camera-header">Scan QR Code</h3>
-          <video
-            ref={videoRef}
-            autoPlay
-            playsInline
-            width="100%"
-            height="auto"
-            className="camera-feed"
-            style={{ backgroundColor: "black" }} // Fallback background color
-          />
           <QrReader
             constraints={{
               facingMode: "environment", // Use the rear camera
