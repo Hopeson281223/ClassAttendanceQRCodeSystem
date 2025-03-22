@@ -158,8 +158,10 @@ def get_sessions():
         # Query only sessions belonging to this instructor
         sessions = Session.query.filter_by(instructor_id=user.user_id).all()
 
+        # Include session_id in the response
         return jsonify([{
             "id": s.id,
+            "session_id": s.session_id,  # Add this line to include session_id
             "name": s.name,
             "instructor_id": s.instructor_id,
             "created_at": s.created_at.strftime("%Y-%m-%d %H:%M:%S")  # Convert to readable format
