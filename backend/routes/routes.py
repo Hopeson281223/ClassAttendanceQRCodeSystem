@@ -194,7 +194,7 @@ def mark_attendance():
         if not session_id:
             return jsonify({"error": "Missing session_id"}), 400
 
-        # Query the session using session_id (not id)
+        # Query the session using session_id
         session = Session.query.filter_by(session_id=session_id).first()
         if not session:
             return jsonify({"error": "Invalid session ID"}), 400
@@ -204,7 +204,7 @@ def mark_attendance():
 
         # Check if attendance is already marked
         existing_attendance = Attendance.query.filter_by(
-            student_id=user.user_id, session_id=session.id  # Use session.id for the foreign key
+            student_id=user.user_id, session_id=session_id  # Use session_id directly
         ).first()
         if existing_attendance:
             return jsonify({"message": "Attendance already marked"}), 200
@@ -212,7 +212,7 @@ def mark_attendance():
         # Mark attendance
         new_attendance = Attendance(
             student_id=user.user_id,
-            session_id=session.id,  # Use session.id for the foreign key
+            session_id=session_id,  # Use session_id directly
             timestamp=datetime.utcnow()
         )
         db.session.add(new_attendance)
@@ -221,10 +221,6 @@ def mark_attendance():
         print(f"Attendance successfully marked for student {user.user_id} in session {session_id}")
 
         return jsonify({"message": "Attendance marked successfully!"}), 201
-
-    except Exception as e:
-        print(f"Error marking attendance: {e}")
-        return jsonify({"error": "An error occurred while marking attendance."}), 500
 
     except Exception as e:
         print(f"Error marking attendance: {e}")
