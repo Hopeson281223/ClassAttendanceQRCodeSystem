@@ -73,47 +73,57 @@ const StudentDashboard = () => {
 
     // Mark Attendance
     const handleMarkAttendance = async (session_id) => {
-      setLoading(true);
-      setError(""); // Clear any previous error
-      setSuccessMessage(""); // Clear any previous success message
-  
       try {
+          setLoading(true);
+          setError("");
+          setSuccessMessage("");
+  
           // Retrieve token and user data from localStorage
           const token = localStorage.getItem("token");
           const user = JSON.parse(localStorage.getItem("user") || "{}");
-
-          console.log("BToken", token);
-          console.log("BUser", user)
-          console.log(!token, !user?.user_id, user?.role)
-
+  
+          // Log the user object for debugging
+          console.log("User Object from localStorage:", user);
+  
           // Validate user and token
-          if (!token || !user?.user_id || user?.role !== "student") {
+          if (!token) {
+              console.log("Validation failed: Missing token.");
+              setError("Unauthorized: Please log in again.");
+              return;
+          }
+  
+          if (!user?.id) { // Check for user.id instead of user.user_id
+              console.log("Validation failed: Missing user ID.");
+              setError("Unauthorized: User ID is missing. Please log in again.");
+              return;
+          }
+  
+          if (user?.role !== "student") {
+              console.log("Validation failed: Invalid role.");
               setError("Unauthorized: Only students can mark attendance.");
               return;
           }
-
-          console.log("AToken", token);
-          console.log("AUser", user)
-          console.log(!token, !user?.user_id, user?.role)
   
-
           // Validate session_id
           if (!session_id) {
+              console.log("Validation failed: Invalid session_id.");
               setError("Invalid session ID. Please scan a valid QR code.");
               return;
           }
   
-
           // Prepare the request body
           const requestBody = {
-              session_id: session_id, // session_id is already a string
+              session_id: session_id,
           };
-
-          
+  
+          // Log the request body and token for debugging
+          console.log("Request Body:", requestBody);
+          console.log("Token:", token);
+  
           // Make API call to mark attendance
           const response = await axios.post(
               "https://classattendanceqrcodesystem.onrender.com/api/attendance",
-              requestBody, // Send the correctly formatted body
+              requestBody,
               {
                   headers: {
                       Authorization: `Bearer ${token}`,
@@ -121,6 +131,9 @@ const StudentDashboard = () => {
                   },
               }
           );
+  
+          // Log the API response for debugging
+          console.log("API Response:", response);
   
           // Handle API response
           if (response.status === 201) {
@@ -130,23 +143,17 @@ const StudentDashboard = () => {
               setError("Error marking attendance. Please try again.");
           }
       } catch (error) {
-          console.error("API Error:", error);
-  
-          // Handle specific error cases
+          console.error("API Error Details:", error);
           if (error.response) {
-              // Server responded with an error status code (4xx or 5xx)
-              const errorMessage = error.response.data?.error || "An error occurred while marking attendance.";
-              setError(errorMessage);
+              setError(error.response.data?.error || "An error occurred while marking attendance.");
           } else if (error.request) {
-              // The request was made but no response was received
               setError("Network error. Please check your internet connection.");
           } else {
-              // Something else went wrong
               setError("An unexpected error occurred. Please try again.");
           }
       } finally {
           setLoading(false);
-          setScannedData(""); // Clear scanned data after marking attendance
+          setScannedData("");
       }
   };
 
