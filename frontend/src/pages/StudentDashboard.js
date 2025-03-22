@@ -73,128 +73,123 @@ const StudentDashboard = () => {
 
     // Mark Attendance
     const handleMarkAttendance = async (session_id) => {
-      try {
-          setLoading(true);
-          setError("");
-          setSuccessMessage("");
-  
-          // Retrieve token and user data from localStorage
-          const token = localStorage.getItem("token");
-          const user = JSON.parse(localStorage.getItem("user") || "{}");
-  
-          // Log the user object for debugging
-          console.log("User Object from localStorage:", user);
-  
-          // Validate user and token
-          if (!token) {
-              console.log("Validation failed: Missing token.");
-              setError("Unauthorized: Please log in again.");
-              return;
-          }
-  
-          if (!user?.id) { // Check for user.id instead of user.user_id
-              console.log("Validation failed: Missing user ID.");
-              setError("Unauthorized: User ID is missing. Please log in again.");
-              return;
-          }
-  
-          if (user?.role !== "student") {
-              console.log("Validation failed: Invalid role.");
-              setError("Unauthorized: Only students can mark attendance.");
-              return;
-          }
-  
-          // Validate session_id
-          if (!session_id) {
-              console.log("Validation failed: Invalid session_id.");
-              setError("Invalid session ID. Please scan a valid QR code.");
-              return;
-          }
-  
-          // Prepare the request body
-          const requestBody = {
-              session_id: session_id,
-          };
-  
-          // Log the request body and token for debugging
-          console.log("Request Body:", requestBody);
-          console.log("Token:", token);
-  
-          // Make API call to mark attendance
-          const response = await axios.post(
-              "https://classattendanceqrcodesystem.onrender.com/api/attendance",
-              requestBody,
-              {
-                  headers: {
-                      Authorization: `Bearer ${token}`,
-                      "Content-Type": "application/json",
-                  },
-              }
-          );
-  
-          // Log the API response for debugging
-          console.log("API Response:", response);
-  
-          // Handle API response
-          if (response.status === 201) {
-              setSuccessMessage("Attendance marked successfully!");
-              alert("Attendance marked successfully!");
-          } else {
-              setError("Error marking attendance. Please try again.");
-          }
-      } catch (error) {
-          console.error("API Error Details:", error);
-          if (error.response) {
-              setError(error.response.data?.error || "An error occurred while marking attendance.");
-          } else if (error.request) {
-              setError("Network error. Please check your internet connection.");
-          } else {
-              setError("An unexpected error occurred. Please try again.");
-          }
-      } finally {
-          setLoading(false);
-          setScannedData("");
-      }
-  };
+        try {
+            setLoading(true);
+            setError("");
+            setSuccessMessage("");
 
-    // Start & Stop Camera feed
-    const startCamera = () => {
-        setCameraStarted(true); // Start camera feed
-    };
+            // Retrieve token and user data from localStorage
+            const token = localStorage.getItem("token");
+            const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-    const stopCamera = () => {
-        setCameraStarted(false); // Stop camera feed
-        if (mediaStreamRef.current) {
-            const tracks = mediaStreamRef.current.getTracks();
-            tracks.forEach((track) => track.stop()); // Stop all tracks
+            // Log the user object for debugging
+            console.log("User Object from localStorage:", user);
+
+            // Validate user and token
+            if (!token) {
+                console.log("Validation failed: Missing token.");
+                setError("Unauthorized: Please log in again.");
+                return;
+            }
+
+            if (!user?.id) { // Check for user.id instead of user.user_id
+                console.log("Validation failed: Missing user ID.");
+                setError("Unauthorized: User ID is missing. Please log in again.");
+                return;
+            }
+
+            if (user?.role !== "student") {
+                console.log("Validation failed: Invalid role.");
+                setError("Unauthorized: Only students can mark attendance.");
+                return;
+            }
+
+            // Validate session_id
+            if (!session_id) {
+                console.log("Validation failed: Invalid session_id.");
+                setError("Invalid session ID. Please scan a valid QR code.");
+                return;
+            }
+
+            // Prepare the request body
+            const requestBody = {
+                session_id: session_id,
+            };
+
+            // Log the request body and token for debugging
+            console.log("Request Body:", requestBody);
+            console.log("Token:", token);
+
+            // Make API call to mark attendance
+            const response = await axios.post(
+                "https://classattendanceqrcodesystem.onrender.com/api/attendance",
+                requestBody,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            // Log the API response for debugging
+            console.log("API Response:", response);
+
+            // Handle API response
+            if (response.status === 201) {
+                setSuccessMessage("Attendance marked successfully!");
+                alert("Attendance marked successfully!");
+            } else {
+                setError("Error marking attendance. Please try again.");
+            }
+        } catch (error) {
+            console.error("API Error Details:", error);
+            if (error.response) {
+                setError(error.response.data?.error || "An error occurred while marking attendance.");
+            } else if (error.request) {
+                setError("Network error. Please check your internet connection.");
+            } else {
+                setError("An unexpected error occurred. Please try again.");
+            }
+        } finally {
+            setLoading(false);
+            setScannedData("");
         }
     };
 
-    const getCameraFeed = async () => {
+    // Start & Stop Camera feed
+    const startCamera = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            mediaStreamRef.current = stream; // Store the stream to stop it later
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
             }
+            setCameraStarted(true); // Start camera feed
         } catch (error) {
             console.error("Error accessing the camera: ", error);
+            setError("Unable to access the camera. Please check your permissions and ensure your camera is connected.");
         }
     };
 
-    useEffect(() => {
-        if (cameraStarted) {
-            getCameraFeed();
+    const stopCamera = () => {
+        if (mediaStreamRef.current) {
+            const tracks = mediaStreamRef.current.getTracks();
+            tracks.forEach((track) => track.stop()); // Stop all tracks
+            mediaStreamRef.current = null; // Clear the media stream reference
         }
+        if (videoRef.current) {
+            videoRef.current.srcObject = null; // Clear the video source
+        }
+        setCameraStarted(false); // Stop camera feed
+    };
 
+    // Cleanup on component unmount
+    useEffect(() => {
         return () => {
-            if (videoRef.current && videoRef.current.srcObject) {
-                const stream = videoRef.current.srcObject;
-                const tracks = stream.getTracks();
-                tracks.forEach((track) => track.stop());
-                videoRef.current.srcObject = null;
-            }
+            stopCamera();
         };
-    }, [cameraStarted]);
+    }, []);
 
     // Logout
     const handleLogout = () => {
