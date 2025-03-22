@@ -88,13 +88,14 @@ const StudentDashboard = () => {
               return;
           }
   
+          console.log("Before const requestBody if (!session_id) {")
+
           // Validate session_id
           if (!session_id) {
               setError("Invalid session ID. Please scan a valid QR code.");
               return;
           }
   
-          console.log("Before const requestBody")
 
           // Prepare the request body
           const requestBody = {
