@@ -1,70 +1,189 @@
-/* --- Register Page Container --- */
-.register-container {
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+input, select {
   width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input:focus, select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+}
+
+/* Login Container */
+.login-container {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Form Heading --- */
-.register-container h2 {
-  font-size: 24px;
+.login-container h2 {
   margin-bottom: 20px;
+  font-size: 24px;
   color: #333;
 }
 
-/* --- Input Fields and Select Dropdown --- */
-.register-container input,
-.register-container select {
-  width: 90%;
-  max-width: 350px;
+.login-container .input-field {
+  width: 100%;
   padding: 12px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s ease-in-out;
 }
 
-.register-container input:focus,
-.register-container select:focus {
-  border-color: #007bff;
-}
-
-/* --- Register Button --- */
-.register-container button {
-  width: 90%;
-  max-width: 350px;
+.login-container .btn-login {
+  width: 100%;
   padding: 12px;
   margin-top: 10px;
-  border: none;
-  border-radius: 5px;
-  background: #007bff;
-  color: #fff;
-  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease;
 }
 
-.register-container button:hover {
-  background: #0056b3;
+.login-container .btn-login:hover {
+  background-color: #0056b3;
 }
 
-/* --- Disabled Button State --- */
-.register-container button:disabled {
-  background: #ccc;
+.login-container .btn-login:disabled {
+  background-color: #ccc;
   cursor: not-allowed;
 }
 
-/* --- Login Link --- */
+.login-container .link {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.login-container .link:hover {
+  text-decoration: underline;
+}
+
+/* Register Container */
+.register-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.register-container input,
+.register-container select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.register-container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.register-container button:hover {
+  background-color: #0056b3;
+}
+
+.register-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 .register-container p {
   margin-top: 15px;
   font-size: 14px;
@@ -72,58 +191,126 @@
 
 .register-container a {
   color: #007bff;
-  text-decoration: none;
+  font-weight: bold;
 }
 
 .register-container a:hover {
   text-decoration: underline;
 }
 
-/* --- Responsive Design --- */
-@media (max-width: 600px) {
-  .register-container {
-      width: 90%;
-      padding: 15px;
-  }
-
-  .register-container input,
-  .register-container select,
-  .register-container button {
-      width: 100%;
-  }
-}
-
-/* General Page Styling */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
-/* Login Container */
-.login-container {
+/* Admin Dashboard */
+.admin-dashboard {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
   background: #fff;
-  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 400px;
-  max-width: 90%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Title */
-.login-container h2 {
+.admin-dashboard h1 {
   margin-bottom: 20px;
   font-size: 24px;
   color: #333;
 }
 
-/* Input Fields */
-.input-field {
+.admin-dashboard nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.admin-dashboard nav ul li {
+  margin-bottom: 15px;
+}
+
+.admin-dashboard .nav-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.admin-dashboard .nav-btn.active {
+  background-color: #0056b3;
+}
+
+.admin-dashboard .logout-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.admin-dashboard .logout-btn:hover {
+  background-color: #a71d2a;
+}
+
+.admin-dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.admin-dashboard table, th, td {
+  border: 1px solid #ddd;
+}
+
+.admin-dashboard th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+.admin-dashboard th {
+  background-color: #007bff;
+  color: white;
+}
+
+.admin-dashboard tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.admin-dashboard button {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.admin-dashboard button:hover {
+  background-color: #218838;
+}
+
+.admin-dashboard .error {
+  color: red;
+  text-align: center;
+}
+
+/* Instructor Dashboard */
+.instructor-dashboard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.instructor-dashboard h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.instructor-dashboard input {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
@@ -132,312 +319,39 @@ body {
   font-size: 16px;
 }
 
-/* Login Button */
-.btn-login {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
+.instructor-dashboard button {
   background-color: #007bff;
   color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
-.btn-login:hover {
-  background-color: #0056b3;
-}
-
-.btn-login:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Links */
-.link {
-  text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
-}
-
-.link:hover {
-  text-decoration: underline;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-  .login-container {
-      width: 90%;
-      padding: 20px;
-  }
-
-  .input-field, .btn-login {
-      font-size: 14px;
-      padding: 10px;
-  }
-}
-
-@media (min-width: 601px) and (max-width: 900px) {
-  .login-container {
-      width: 70%;
-  }
-}
-
-@media (min-width: 901px) {
-  .login-container {
-      width: 400px;
-  }
-}
-
-/* Student Dashboard Styles */
-.student-dashboard {
-  padding: 20px;
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-  overflow-y: auto;
-  height: 100vh;
-  position: relative;
-}
-
-.student-dashboard h1 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.student-dashboard p {
-  font-size: 16px;
-  color: #666;
-}
-
-/* Camera and QR Scanner Container */
-.student-dashboard .camera-container {
-  position: relative;
-  width: 420px;
-  height: 320px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  text-align: center;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 2;
-}
-
-/* Live Video Feed */
-.student-dashboard .camera-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
-  border-radius: 10px;
-  z-index: 3;
-}
-
-/* QR Reader Styles */
-.student-dashboard .qr-reader {
-  width: 420px;
-  height: 320px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  margin-top: 20px;
-  position: relative;
-  z-index: 1;
-  opacity: 0.5;
-}
-
-/* Buttons */
-.student-dashboard button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 15px;
-  width: 100%;
-  max-width: 300px;
-}
-
-.student-dashboard button:hover {
-  background-color: #0056b3;
-}
-
-/* Stop Scan and Logout Buttons */
-.student-dashboard .stop-scan,
-.student-dashboard .logout {
-  background-color: #dc3545;
-}
-
-.student-dashboard .stop-scan:hover,
-.student-dashboard .logout:hover {
-  background-color: #a71d2a;
-}
-
-/* Loading and Error Messages */
-.student-dashboard p.loading {
-  color: blue;
-}
-
-.student-dashboard p.error {
-  color: red;
-  margin-top: 10px;
-}
-
-.student-dashboard .success-message {
-  color: green;
-  margin-top: 10px;
-}
-
-/* Feed Container */
-.student-dashboard .feed-container {
-  width: 100%;
-  max-width: 600px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-}
-
-.student-dashboard .feed-item {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-.student-dashboard .feed-item:last-child {
-  border-bottom: none;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .student-dashboard .camera-container {
-      width: 100%;
-      height: auto;
-      padding: 8px;
-  }
-  .student-dashboard .qr-reader {
-      width: 100%;
-      height: auto;
-      opacity: 0.3;
-  }
-  .student-dashboard button {
-      width: 100%;
-      padding: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .student-dashboard .camera-container {
-      width: 100%;
-      height: 300px;
-  }
-  .student-dashboard .qr-reader {
-      width: 100%;
-      height: 250px;
-      opacity: 0.2;
-  }
-  .student-dashboard button {
-      width: 100%;
-      padding: 14px;
-  }
-}
-
-/* General Styles */
-.instructor-dashboard {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  font-family: 'Arial', sans-serif;
-}
-
-/* Header */
-.instructor-dashboard h1 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.instructor-dashboard h2 {
-  font-size: 1.5rem;
-  color: #555;
-  margin-top: 20px;
-}
-
-/* Input Field */
-.instructor-dashboard input {
-  width: 80%;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-
-/* Buttons */
-.instructor-dashboard button {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px 15px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
 .instructor-dashboard button:hover {
-  opacity: 0.8;
+  background-color: #0056b3;
 }
 
-/* Create Session Button */
-.create-session-btn {
-  background-color: #28a745;
-  color: white;
-}
-
-.create-session-btn:disabled {
+.instructor-dashboard button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-/* QR Code Section */
-.qr-code-container {
+.instructor-dashboard .qr-code-container {
   margin-top: 20px;
   padding: 15px;
   background: white;
   border-radius: 10px;
-  display: inline-block;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.qr-code-container h3 {
-  color: #222;
-  margin-bottom: 10px;
-}
-
-/* Attendance List */
-.attendance-list {
+.instructor-dashboard .attendance-list {
   list-style-type: none;
   padding: 0;
   margin-top: 20px;
 }
 
-.attendance-list li {
+.instructor-dashboard .attendance-list li {
   background-color: #fff;
   padding: 10px;
   margin: 5px 0;
@@ -445,106 +359,115 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Logout Button */
-.logout-btn {
-  background-color: red;
+.instructor-dashboard .logout-btn {
+  background-color: #dc3545;
   color: white;
   padding: 10px 15px;
   border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.logout-btn:hover {
-  background-color: darkred;
+.instructor-dashboard .logout-btn:hover {
+  background-color: #a71d2a;
 }
 
-/* Admin Dashboard Styles */
-.admin-dashboard {
-  font-family: Arial, sans-serif;
-  max-width: 1000px;
-  margin: auto;
+/* Student Dashboard */
+.student-dashboard {
+  max-width: 600px;
+  margin: 0 auto;
   padding: 20px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-  text-align: center;
+.student-dashboard h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
   color: #333;
 }
 
-nav ul {
-  display: flex;
-  justify-content: center;
-  padding: 0;
-  gap: 15px;
-}
-
-.nav-btn, .logout-btn {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.nav-btn.active {
-  background: #0056b3;
-}
-
-.logout-btn {
-  background: #dc3545;
-}
-
-.nav-btn:hover, .logout-btn:hover {
-  opacity: 0.8;
-}
-
-/* Table Styles */
-table {
+.student-dashboard .camera-container {
+  position: relative;
   width: 100%;
-  border-collapse: collapse;
+  height: 300px;
   margin-top: 20px;
-  background: white;
-  border-radius: 5px;
+  background: #000;
+  border-radius: 10px;
   overflow: hidden;
 }
 
-table, th, td {
-  border: 1px solid #ddd;
+.student-dashboard .camera-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-th, td {
-  padding: 10px;
-  text-align: left;
+.student-dashboard .qr-reader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
-th {
-  background: #007bff;
+.student-dashboard button {
+  background-color: #007bff;
   color: white;
-}
-
-tbody tr:nth-child(even) {
-  background: #f2f2f2;
-}
-
-button {
-  background: #28a745;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 3px;
+  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s ease;
 }
 
-button:hover {
-  background: #218838;
+.student-dashboard button:hover {
+  background-color: #0056b3;
 }
 
-.error {
+.student-dashboard button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.student-dashboard .logout-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.student-dashboard .logout-btn:hover {
+  background-color: #a71d2a;
+}
+
+.student-dashboard .success-message {
+  color: green;
+  margin-top: 10px;
+}
+
+.student-dashboard .error-message {
   color: red;
-  text-align: center;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container, .register-container, .admin-dashboard, .instructor-dashboard, .student-dashboard {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .student-dashboard .camera-container {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-dashboard .camera-container {
+    height: 200px;
+  }
 }
