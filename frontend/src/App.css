@@ -499,6 +499,10 @@ input:focus, select:focus {
 .student-dashboard {
   max-width: 600px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
   background: #fff;
   border-radius: 10px;
