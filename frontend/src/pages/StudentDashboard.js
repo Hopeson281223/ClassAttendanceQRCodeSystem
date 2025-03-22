@@ -82,6 +82,10 @@ const StudentDashboard = () => {
             const token = localStorage.getItem("token");
             const user = JSON.parse(localStorage.getItem("user") || "{}");
 
+            console.log("Check below");
+            console.log("Token:", token);
+            console.log("user:", user)k;
+
             // Validate user and token
             if (!token || !user?.user_id || user?.role !== "student") {
                 setError("Unauthorized: Only students can mark attendance.");
@@ -94,12 +98,10 @@ const StudentDashboard = () => {
                 return;
             }
 
-            console.log("Data type of session_id bfr sessionIdString:", typeof session_id, session_id)            
+                    
             // Ensure session_id is a string
             const sessionIdString = String(session_id); // Convert session_id to a string
-
-            console.log("Data type of session_id aftr sessionIdString:", typeof session_id, session_id)
-        
+            
             // Prepare the request body
             const requestBody = {
                 session_id: sessionIdString, // Ensure the value is a string
