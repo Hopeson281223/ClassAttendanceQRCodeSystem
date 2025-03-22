@@ -39,6 +39,8 @@ const StudentDashboard = () => {
             const session_id = extractSessionId(result.text); // Extract session_id
             console.log("Extracted Session ID:", session_id);
 
+            console.log("Data type of session_id:", typeof session_id);
+
             if (session_id) {
                 setScannedData(session_id);
                 handleMarkAttendance(session_id); // Mark attendance using session_id
