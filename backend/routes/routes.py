@@ -257,27 +257,26 @@ def view_attendance(session_id):
 
 ### QR CODE ROUTES ###
 
-@routes_bp.route("/api/qr/<int:session_id>", methods=["GET"])
+@routes_bp.route("/api/qr/<string:session_id>", methods=["GET"])  # Change to string for session_id
 @jwt_required()
 def generate_qr(session_id):
-    session = Session.query.get(session_id)
+    session = Session.query.filter_by(session_id=session_id).first()  # Query by session_id
     if not session:
         return jsonify({"error": "Session not found"}), 404
 
-    qr_data = f"{API_BASE_URL}/session/{session_id}"
+    qr_data = f"{API_BASE_URL}/api/attendance/mark/{session_id}"  # Use session_id in the URL
 
     # Create a QRCode instance with the desired settings
     qr = qrcode.QRCode(
-        version=1,  # Adjust version for the size of the QR code
+        version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
         box_size=10,
-        border=4  # Increase this value for a larger margin
+        border=4
     )
     qr.add_data(qr_data)
     qr.make(fit=True)
 
-    img = qr.make_image(fill="black", back_color="white")  # Ensure white background
-
+    img = qr.make_image(fill="black", back_color="white")
     img_io = BytesIO()
     img.save(img_io, format="PNG")
     img_io.seek(0)
