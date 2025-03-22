@@ -115,7 +115,7 @@ const InstructorDashboard = () => {
             alert("No session available to generate QR code.");
             return;
         }
-        setQrUrl(`${API_BASE_URL}/session/${currentSession.id}`);
+        setQrUrl(`${API_BASE_URL}/session/${currentSession.session_id}`); // Use session_id instead of id
     };
 
     const fetchAttendance = async (sessionId) => {
@@ -172,7 +172,7 @@ const InstructorDashboard = () => {
             {currentSession ? (
                 <div>
                     <p>
-                        <strong>{currentSession.name}</strong> (ID: {currentSession.id}) <br />
+                        <strong>{currentSession.name}</strong> (Session ID: {currentSession.session_id}) <br /> {/* Display session_id */}
                         Created At: {currentSession.formattedTime}
                     </p>
                     <button onClick={() => fetchAttendance(currentSession.id)}>View Attendance</button>
