@@ -71,20 +71,20 @@ const AdminDashboard = () => {
     };
 
     // Delete a session
-    const handleDeleteSession = async (sessionId) => {
-        if (window.confirm("Are you sure you want to delete this session?")) {
-            try {
-                const token = localStorage.getItem("token");
-                await axios.delete(`https://classattendanceqrcodesystem.onrender.com/api/sessions/${sessionId}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setSessions(sessions.filter((session) => session.id !== sessionId));
-                alert("Session deleted successfully!");
-            } catch (error) {
-                setError("Failed to delete session.");
-            }
+const handleDeleteSession = async (sessionId) => {
+    if (window.confirm("Are you sure you want to delete this session?")) {
+        try {
+            const token = localStorage.getItem("token");
+            await axios.delete(`https://classattendanceqrcodesystem.onrender.com/api/sessions/${sessionId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            setSessions(sessions.filter((session) => session.id !== sessionId));
+            alert("Session deleted successfully!");
+        } catch (error) {
+            setError("Failed to delete session.");
         }
-    };
+    }
+};
 
     // Delete an attendance record
     const handleDeleteAttendance = async (attendanceId) => {
