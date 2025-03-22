@@ -337,7 +337,7 @@ input:focus, select:focus {
   width: 200px; /* Fixed width for all buttons */
   border: none; /* Remove default border */
   text-align: center; /* Center text inside buttons */
-  margin: 10px 0; /* Spacing between buttons */
+  margin: 10px auto; /* Spacing between buttons */
   display: block; /* Ensure buttons are block-level for centering */
 }
 
