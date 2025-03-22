@@ -295,7 +295,6 @@ input:focus, select:focus {
 }
 
 /* Instructor Dashboard */
-/* Instructor Dashboard */
 .instructor-dashboard {
   max-width: 800px;
   margin: 0 auto;
@@ -326,15 +325,19 @@ input:focus, select:focus {
   display: block; /* Ensure inputs are block-level for centering */
 }
 
+/* Buttons */
 .instructor-dashboard button {
   background-color: #007bff;
   color: white;
-  padding: 8px 12px; /* Smaller padding */
+  padding: 10px 20px; /* Consistent padding */
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin: 10px 0; /* Spacing */
   font-size: 14px; /* Smaller font size */
+  width: 200px; /* Fixed width for all buttons */
+  border: none; /* Remove default border */
+  text-align: center; /* Center text inside buttons */
+  margin: 10px 0; /* Spacing between buttons */
   display: block; /* Ensure buttons are block-level for centering */
 }
 
@@ -347,6 +350,16 @@ input:focus, select:focus {
   cursor: not-allowed;
 }
 
+/* Logout Button */
+.instructor-dashboard .logout-btn {
+  background-color: #dc3545;
+}
+
+.instructor-dashboard .logout-btn:hover {
+  background-color: #a71d2a;
+}
+
+/* QR Code Container */
 .instructor-dashboard .qr-code-container {
   margin-top: 20px;
   padding: 15px;
@@ -360,6 +373,7 @@ input:focus, select:focus {
   align-items: center; /* Center QR code content */
 }
 
+/* Attendance List */
 .instructor-dashboard .attendance-list {
   list-style-type: none;
   padding: 0;
@@ -374,22 +388,6 @@ input:focus, select:focus {
   margin: 5px 0;
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.instructor-dashboard .logout-btn {
-  background-color: #dc3545;
-  color: white;
-  padding: 8px 12px; /* Smaller padding */
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin: 20px 0; /* Spacing */
-  font-size: 14px; /* Smaller font size */
-  display: block; /* Ensure logout button is block-level for centering */
-}
-
-.instructor-dashboard .logout-btn:hover {
-  background-color: #a71d2a;
 }
 
 /* Attendance Table Styling */

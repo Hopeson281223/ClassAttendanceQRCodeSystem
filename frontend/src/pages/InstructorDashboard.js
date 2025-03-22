@@ -189,7 +189,7 @@ const InstructorDashboard = () => {
                                 value={qrUrl}
                                 style={{ margin: "20px", border: "5px solid white" }}
                             />
-                            <p>Scan to join: <a href={qrUrl}>{qrUrl}</a></p>
+                            <p>Scan to join</p>
                         </div>
                     )}
                 </div>
