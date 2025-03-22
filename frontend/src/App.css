@@ -240,6 +240,7 @@ input:focus, select:focus {
 }
 
 .admin-dashboard .logout-btn {
+  margin-top: 10px;
   background-color: #dc3545;
   color: white;
   padding: 10px 15px;
