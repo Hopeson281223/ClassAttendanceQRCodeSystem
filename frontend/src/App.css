@@ -353,59 +353,106 @@ body {
   }
 }
 
+/* General Styles */
 .instructor-dashboard {
   max-width: 800px;
-  margin: auto;
+  margin: 40px auto;
   padding: 20px;
-  background: #f9f9f9;
+  background-color: #f9f9f9;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  font-family: 'Arial', sans-serif;
 }
 
-h1, h2, h3 {
+/* Header */
+.instructor-dashboard h1 {
+  font-size: 2rem;
   color: #333;
+  margin-bottom: 10px;
 }
 
-input {
+.instructor-dashboard h2 {
+  font-size: 1.5rem;
+  color: #555;
+  margin-top: 20px;
+}
+
+/* Input Field */
+.instructor-dashboard input {
   width: 80%;
   padding: 10px;
-  margin: 10px 0;
+  margin-top: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 1rem;
 }
 
-button {
-  padding: 10px 15px;
+/* Buttons */
+.instructor-dashboard button {
+  display: inline-block;
   margin: 10px;
+  padding: 10px 15px;
+  font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
-button:hover {
+.instructor-dashboard button:hover {
   opacity: 0.8;
 }
 
-button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
+/* Create Session Button */
 .create-session-btn {
-  background: #007bff;
+  background-color: #28a745;
   color: white;
 }
 
-.qr-code-section {
+.create-session-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* QR Code Section */
+.qr-code-container {
   margin-top: 20px;
   padding: 15px;
   background: white;
   border-radius: 10px;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+.qr-code-container h3 {
+  color: #222;
+  margin-bottom: 10px;
+}
+
+/* Attendance List */
+.attendance-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.attendance-list li {
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Logout Button */
 .logout-btn {
-  background: red;
+  background-color: red;
   color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.logout-btn:hover {
+  background-color: darkred;
 }
