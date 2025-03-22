@@ -220,13 +220,13 @@ const AdminDashboard = () => {
                             )}
                         </tbody>
                     </table>
+                    <div>
+                        <button onClick={handleLogout} className="logout-btn">
+                                Logout
+                        </button>
+                    </div>
                 </div>
             )}
-            <li>
-                <button onClick={handleLogout} className="logout-btn">
-                    Logout
-                </button>
-            </li>
         </div>
     );
 };
