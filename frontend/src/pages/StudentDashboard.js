@@ -81,14 +81,21 @@ const StudentDashboard = () => {
           // Retrieve token and user data from localStorage
           const token = localStorage.getItem("token");
           const user = JSON.parse(localStorage.getItem("user") || "{}");
-  
+
+          console.log("BToken", token);
+          console.log("BUser", user)
+          console.log(!token, !user?.user_id, user?.role)
+
           // Validate user and token
           if (!token || !user?.user_id || user?.role !== "student") {
               setError("Unauthorized: Only students can mark attendance.");
               return;
           }
+
+          console.log("AToken", token);
+          console.log("AUser", user)
+          console.log(!token, !user?.user_id, user?.role)
   
-          console.log("Before const requestBody if (!session_id) {");
 
           // Validate session_id
           if (!session_id) {
