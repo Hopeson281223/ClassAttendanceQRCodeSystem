@@ -558,9 +558,8 @@ input:focus, select:focus {
   background-color: #dc3545;
   color: white;
   padding: 10px 15px;
-  margin: 10px;
-  display: flex;
-  justify-content: center;
+  margin: 20px auto;
+  display: block;
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
