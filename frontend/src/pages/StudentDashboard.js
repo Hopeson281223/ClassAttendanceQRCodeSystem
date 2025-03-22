@@ -206,7 +206,7 @@ const StudentDashboard = () => {
     };
 
     return (
-        <div className="dashboard-container">
+        <div className="student-dashboard">
             <h1 className="title">Student Dashboard</h1>
             <p className="welcome-message">Welcome, Student! Scan the QR code to mark your attendance.</p>
 

@@ -200,6 +200,7 @@ body {
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
 .student-dashboard h1 {
@@ -223,6 +224,9 @@ body {
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Live Video Feed */
@@ -281,36 +285,56 @@ p.error {
   margin-top: 10px;
 }
 
+/* Feed Container */
+.feed-container {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.feed-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.feed-item:last-child {
+  border-bottom: none;
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .camera-container {
-    width: 100%;
-    height: auto;
-    padding: 8px;
+      width: 100%;
+      height: auto;
+      padding: 8px;
   }
 
   .qr-reader {
-    width: 100%;
+      width: 100%;
   }
 
   button {
-    width: 100%;
-    padding: 14px;
+      width: 100%;
+      padding: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .camera-container {
-    width: 100%;
-    height: 250px;
+      width: 100%;
+      height: 250px;
   }
 
   .qr-reader {
-    width: 100%;
+      width: 100%;
   }
 
   button {
-    width: 100%;
-    padding: 14px;
+      width: 100%;
+      padding: 14px;
   }
 }
