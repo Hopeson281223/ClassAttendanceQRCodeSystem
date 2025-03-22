@@ -399,7 +399,7 @@ def delete_user(user_id):
         return jsonify({"error": f"An error occurred while deleting the user: {str(e)}"}), 500
 
 # Delete a session (Admin only)
-@routes_bp.route('/api/sessions/<int:session_id>', methods=['DELETE'])
+@routes_bp.route('/api/sessions/<string:session_id>', methods=['DELETE'])  # Change to string
 @jwt_required()
 def delete_session(session_id):
     try:
@@ -409,8 +409,8 @@ def delete_session(session_id):
         if not user or user.role != 'admin':
             return jsonify({"error": "Only admins can delete sessions"}), 403
 
-        # Find the session to delete
-        session_to_delete = Session.query.filter_by(id=session_id).first()
+        # Find the session to delete using session_id (string)
+        session_to_delete = Session.query.filter_by(session_id=session_id).first()  # Use session_id
         if not session_to_delete:
             return jsonify({"error": "Session not found"}), 404
 
