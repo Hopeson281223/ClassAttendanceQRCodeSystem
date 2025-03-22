@@ -178,19 +178,24 @@ def get_sessions():
 @jwt_required()
 def mark_attendance():
     try:
+        # Get the current user's ID from the JWT token
         current_user_id = get_jwt_identity()
         user = User.query.filter_by(user_id=current_user_id).first()
 
+        # Ensure the user is a student
         if not user or user.role != "student":
             return jsonify({"error": "Only students can mark attendance"}), 403
 
+        # Parse the session_id from the request
         data = request.get_json()
         session_id = data.get("session_id")
 
+        # Validate session_id
         if not session_id:
             return jsonify({"error": "Missing session_id"}), 400
 
-        session = Session.query.filter_by(id=session_id).first()
+        # Query the session using session_id (not id)
+        session = Session.query.filter_by(session_id=session_id).first()
         if not session:
             return jsonify({"error": "Invalid session ID"}), 400
 
@@ -199,7 +204,7 @@ def mark_attendance():
 
         # Check if attendance is already marked
         existing_attendance = Attendance.query.filter_by(
-            student_id=user.user_id, session_id=session_id
+            student_id=user.user_id, session_id=session.id  # Use session.id for the foreign key
         ).first()
         if existing_attendance:
             return jsonify({"message": "Attendance already marked"}), 200
@@ -207,7 +212,7 @@ def mark_attendance():
         # Mark attendance
         new_attendance = Attendance(
             student_id=user.user_id,
-            session_id=session_id,
+            session_id=session.id,  # Use session.id for the foreign key
             timestamp=datetime.utcnow()
         )
         db.session.add(new_attendance)
@@ -216,6 +221,10 @@ def mark_attendance():
         print(f"Attendance successfully marked for student {user.user_id} in session {session_id}")
 
         return jsonify({"message": "Attendance marked successfully!"}), 201
+
+    except Exception as e:
+        print(f"Error marking attendance: {e}")
+        return jsonify({"error": "An error occurred while marking attendance."}), 500
 
     except Exception as e:
         print(f"Error marking attendance: {e}")
