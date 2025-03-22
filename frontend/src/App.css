@@ -286,7 +286,7 @@ input:focus, select:focus {
 }
 
 .admin-dashboard button:hover {
-  background-color: #218838;
+  background-color: #064f16;
 }
 
 .admin-dashboard .error {
@@ -302,6 +302,7 @@ input:focus, select:focus {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center align all text */
 }
 
 .instructor-dashboard h1 {
@@ -312,11 +313,13 @@ input:focus, select:focus {
 
 .instructor-dashboard input {
   width: 100%;
+  max-width: 400px; /* Limit input width */
   padding: 12px;
-  margin: 10px 0;
+  margin: 10px auto; /* Center input fields */
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+  display: block; /* Ensure inputs are block-level for centering */
 }
 
 .instructor-dashboard button {
@@ -326,6 +329,8 @@ input:focus, select:focus {
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin: 10px auto; /* Center buttons */
+  display: block; /* Ensure buttons are block-level for centering */
 }
 
 .instructor-dashboard button:hover {
@@ -343,12 +348,16 @@ input:focus, select:focus {
   background: white;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  max-width: 400px; /* Limit QR code container width */
+  margin-left: auto;
+  margin-right: auto; /* Center QR code container */
 }
 
 .instructor-dashboard .attendance-list {
   list-style-type: none;
   padding: 0;
   margin-top: 20px;
+  text-align: left; /* Align list text to the left */
 }
 
 .instructor-dashboard .attendance-list li {
@@ -366,12 +375,91 @@ input:focus, select:focus {
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin: 20px auto; /* Center logout button */
+  display: block; /* Ensure logout button is block-level for centering */
 }
 
 .instructor-dashboard .logout-btn:hover {
   background-color: #a71d2a;
 }
 
+/* Attendance Table Styling */
+.instructor-dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.instructor-dashboard table, th, td {
+  border: 1px solid #ddd;
+}
+
+.instructor-dashboard th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+.instructor-dashboard th {
+  background-color: #007bff;
+  color: white;
+}
+
+.instructor-dashboard tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.instructor-dashboard button.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.instructor-dashboard button.delete-btn:hover {
+  background-color: #a71d2a;
+}
+
+/* Responsive Design for Instructor Dashboard */
+@media (max-width: 768px) {
+  .instructor-dashboard {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .instructor-dashboard input,
+  .instructor-dashboard .qr-code-container {
+    max-width: 100%; /* Full width on smaller screens */
+  }
+
+  .instructor-dashboard table {
+    font-size: 14px; /* Smaller font size for tables on mobile */
+  }
+
+  .instructor-dashboard th, td {
+    padding: 8px; /* Smaller padding for tables on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .instructor-dashboard {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .instructor-dashboard table {
+    font-size: 12px; /* Even smaller font size for very small screens */
+  }
+
+  .instructor-dashboard th, td {
+    padding: 6px; /* Even smaller padding for very small screens */
+  }
+}
 /* Student Dashboard */
 .student-dashboard {
   max-width: 600px;
