@@ -39,8 +39,6 @@ const StudentDashboard = () => {
             const session_id = extractSessionId(result.text); // Extract session_id
             console.log("Extracted Session ID:", session_id);
 
-            console.log("Data type of session_id:", typeof session_id);
-
             if (session_id) {
                 setScannedData(session_id);
                 handleMarkAttendance(session_id); // Mark attendance using session_id
@@ -75,7 +73,6 @@ const StudentDashboard = () => {
 
     // Mark Attendance
     const handleMarkAttendance = async (session_id) => {
-        console.log("Data type of session_id in handle att:", typeof session_id);
         setLoading(true);
         setError(""); // Clear any previous error
         setSuccessMessage(""); // Clear any previous success message
@@ -90,15 +87,19 @@ const StudentDashboard = () => {
                 setError("Unauthorized: Only students can mark attendance.");
                 return;
             }
-
+             
             // Validate session_id
             if (!session_id) {
                 setError("Invalid session ID. Please scan a valid QR code.");
                 return;
             }
 
+            
             // Ensure session_id is a string
             const sessionIdString = String(session_id); // Convert session_id to a string
+
+            console.log("Data type of session_id:", typeof session_id, session_id)
+            console.log("Data type of sessionIdString:", typeof sessionIdString)
 
             // Prepare the request body
             const requestBody = {
