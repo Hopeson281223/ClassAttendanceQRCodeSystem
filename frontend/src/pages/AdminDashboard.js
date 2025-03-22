@@ -103,7 +103,7 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="dashboard-container">
+        <div className="admin-dashboard">
             <h1>Admin Dashboard</h1>
             <nav>
                 <ul style={{ listStyle: "none", padding: 0 }}>
