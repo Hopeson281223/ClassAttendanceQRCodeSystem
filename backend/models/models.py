@@ -42,6 +42,13 @@ class User(db.Model):
             if not db.session.query(User).filter_by(user_id=user_id).first():
                 return user_id
 
+def generate_unique_session_id():
+        """Generate a unique 5-digit session ID."""
+        while True:
+            session_id = random.randint(10000, 99999)
+            if not db.session.query(Session).filter_by(id=session_id).first():
+                return session_id
+                
 class Session(db.Model):
     __tablename__ = "sessions"
 
@@ -55,13 +62,6 @@ class Session(db.Model):
 
     def __repr__(self):
         return f"<Session {self.name}, ID: {self.id}, Instructor: {self.instructor_id}>"
-
-    def generate_unique_session_id():
-        """Generate a unique 5-digit session ID."""
-        while True:
-            session_id = random.randint(10000, 99999)
-            if not db.session.query(Session).filter_by(id=session_id).first():
-                return session_id
 
 class Attendance(db.Model):
     __tablename__ = "attendance"
