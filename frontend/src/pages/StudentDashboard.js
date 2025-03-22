@@ -98,7 +98,9 @@ const StudentDashboard = () => {
           const requestBody = {
               session_id: session_id, // session_id is already a string
           };
-  
+
+          console.log("Request Body:", requestBody);
+
           // Make API call to mark attendance
           const response = await axios.post(
               "https://classattendanceqrcodesystem.onrender.com/api/attendance",
