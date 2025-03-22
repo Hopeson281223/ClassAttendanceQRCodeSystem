@@ -352,3 +352,60 @@ body {
       padding: 14px;
   }
 }
+
+.instructor-dashboard {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.create-session-btn {
+  background: #007bff;
+  color: white;
+}
+
+.qr-code-section {
+  margin-top: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+}
+
+.logout-btn {
+  background: red;
+  color: white;
+}
