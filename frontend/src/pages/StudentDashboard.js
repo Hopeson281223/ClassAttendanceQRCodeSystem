@@ -76,19 +76,37 @@ const StudentDashboard = () => {
   const handleMarkAttendance = async (session_id) => {
     setLoading(true);
     setError(""); // Clear any previous error
-
+    setSuccessMessage(""); // Clear any previous success message
+  
     try {
+      // Retrieve token and user data from localStorage
       const token = localStorage.getItem("token");
       const user = JSON.parse(localStorage.getItem("user") || "{}");
-
-      if (!token || !user?.id || user?.role !== "student") {
+  
+      // Validate user and token
+      if (!token || !user?.user_id || user?.role !== "student") {
         setError("Unauthorized: Only students can mark attendance.");
         return;
       }
-
+  
+      // Validate session_id
+      if (!session_id) {
+        setError("Invalid session ID. Please scan a valid QR code.");
+        return;
+      }
+  
+      // Ensure session_id is a string
+      const sessionIdString = String(session_id); // Convert session_id to a string
+  
+      // Prepare the request body
+      const requestBody = {
+        session_id: sessionIdString, // Ensure the value is a string
+      };
+  
+      // Make API call to mark attendance
       const response = await axios.post(
         "https://classattendanceqrcodesystem.onrender.com/api/attendance",
-        { session_id },
+        requestBody, // Send the correctly formatted body
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -96,21 +114,35 @@ const StudentDashboard = () => {
           },
         }
       );
-
-      if (response.data.message) {
-        alert(response.data.message);
+  
+      // Handle API response
+      if (response.status === 201) {
+        setSuccessMessage("Attendance marked successfully!");
+        alert("Attendance marked successfully!");
       } else {
         setError("Error marking attendance. Please try again.");
       }
-      setScannedData(""); // Clear scanned data after marking attendance
     } catch (error) {
       console.error("API Error:", error);
-      setError(error.response?.data?.error || "Error marking attendance. Please try again.");
+  
+      // Handle specific error cases
+      if (error.response) {
+        // Server responded with an error status code (4xx or 5xx)
+        const errorMessage = error.response.data?.error || "An error occurred while marking attendance.";
+        setError(errorMessage);
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError("Network error. Please check your internet connection.");
+      } else {
+        // Something else went wrong
+        setError("An unexpected error occurred. Please try again.");
+      }
     } finally {
       setLoading(false);
+      setScannedData(""); // Clear scanned data after marking attendance
     }
   };
-
+  
   // Start & Stop Camera feed
   const startCamera = () => {
     setCameraStarted(true); // Start camera feed
