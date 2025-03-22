@@ -20,16 +20,16 @@ const AdminDashboard = () => {
             try {
                 const token = localStorage.getItem("token");
                 if (activeFeature === "manageUsers") {
-                    const response = await axios.get("http://localhost:5000/api/users", {
+                    const response = await axios.get("https://classattendanceqrcodesystem.onrender.com/api/users", {
                         headers: { Authorization: `Bearer ${token}` },
                     });
                     setUsers(response.data);
                 } else if (activeFeature === "manageRecords") {
                     const [attendanceRes, sessionsRes] = await Promise.all([
-                        axios.get("http://localhost:5000/api/attendance", {
+                        axios.get("https://classattendanceqrcodesystem.onrender.com/api/attendance", {
                             headers: { Authorization: `Bearer ${token}` },
                         }),
-                        axios.get("http://localhost:5000/api/sessions/all", {
+                        axios.get("https://classattendanceqrcodesystem.onrender.com/api/sessions/all", {
                             headers: { Authorization: `Bearer ${token}` },
                         }),
                     ]);
@@ -59,7 +59,7 @@ const AdminDashboard = () => {
         if (window.confirm("Are you sure you want to delete this user?")) {
             try {
                 const token = localStorage.getItem("token");
-                await axios.delete(`http://localhost:5000/api/users/${userId}`, {
+                await axios.delete(`https://classattendanceqrcodesystem.onrender.com/api/users/${userId}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setUsers(users.filter((user) => user.user_id !== userId));
@@ -75,7 +75,7 @@ const AdminDashboard = () => {
         if (window.confirm("Are you sure you want to delete this session?")) {
             try {
                 const token = localStorage.getItem("token");
-                await axios.delete(`http://localhost:5000/api/sessions/${sessionId}`, {
+                await axios.delete(`https://classattendanceqrcodesystem.onrender.com/api/sessions/${sessionId}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setSessions(sessions.filter((session) => session.id !== sessionId));
@@ -91,7 +91,7 @@ const AdminDashboard = () => {
         if (window.confirm("Are you sure you want to delete this attendance record?")) {
             try {
                 const token = localStorage.getItem("token");
-                await axios.delete(`http://localhost:5000/api/attendance/${attendanceId}`, {
+                await axios.delete(`https://classattendanceqrcodesystem.onrender.com/api/attendance/${attendanceId}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setAttendance(attendance.filter((record) => record.id !== attendanceId));
