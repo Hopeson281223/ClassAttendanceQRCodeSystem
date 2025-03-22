@@ -206,7 +206,6 @@ input:focus, select:focus {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow-x: auto; /* Ensure the dashboard itself can scroll horizontally if needed */
 }
 
 .admin-dashboard h1 {
@@ -262,8 +261,6 @@ input:focus, select:focus {
   width: 100%;
   border-collapse: collapse;
   margin: 20px auto;
-  overflow-x: auto; /* Allow horizontal scrolling for the table */
-  display: block; /* Make the table a block element for better control */
 }
 
 .admin-dashboard table, th, td {
@@ -273,7 +270,6 @@ input:focus, select:focus {
 .admin-dashboard th, td {
   padding: 10px;
   text-align: left;
-  white-space: nowrap; /* Prevent text from wrapping in table cells */
 }
 
 .admin-dashboard th {
@@ -311,10 +307,13 @@ input:focus, select:focus {
 
   .admin-dashboard table {
     font-size: 14px; /* Reduce font size for better fit on mobile */
+    display: block; /* Allow horizontal scrolling on mobile */
+    overflow-x: auto; /* Enable horizontal scrolling on mobile */
   }
 
   .admin-dashboard th, td {
     padding: 8px; /* Reduce padding for smaller screens */
+    white-space: nowrap; /* Prevent text wrapping in table cells */
   }
 
   .admin-dashboard .nav-btn, .admin-dashboard .logout-btn {
