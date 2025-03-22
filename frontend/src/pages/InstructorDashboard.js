@@ -27,9 +27,6 @@ const InstructorDashboard = () => {
     }, []);
 
     const fetchLatestSession = async () => {
-        console.log("Fetching latest session...");
-        setCurrentSession(null);
-
         const token = localStorage.getItem("token");
         if (!token) {
             alert("Unauthorized! Please log in.");
@@ -52,7 +49,6 @@ const InstructorDashboard = () => {
 
             const data = await response.json();
             if (data.length > 0) {
-                // Sort by latest created session
                 const latestSession = data.sort(
                     (a, b) => new Date(b.created_at) - new Date(a.created_at)
                 )[0];
@@ -102,7 +98,7 @@ const InstructorDashboard = () => {
             console.log("Created Session:", data);
             setSessionName("");
             alert("Session created successfully!");
-            fetchLatestSession(); // Refresh to show new session
+            fetchLatestSession();
         } catch (error) {
             alert(error.message || "Failed to create session");
         } finally {
@@ -115,7 +111,7 @@ const InstructorDashboard = () => {
             alert("No session available to generate QR code.");
             return;
         }
-        setQrUrl(`${API_BASE_URL}/session/${currentSession.session_id}`); // Use session_id instead of id
+        setQrUrl(`${API_BASE_URL}/session/${currentSession.session_id}`);
     };
 
     const fetchAttendance = async (sessionId) => {
@@ -156,7 +152,7 @@ const InstructorDashboard = () => {
     return (
         <div>
             <h1>Instructor Dashboard</h1>
-            {instructorId && <h3>Instructor ID: {instructorId}</h3>} {/* Display Instructor ID below the title */}
+            {instructorId && <h3>Instructor ID: {instructorId}</h3>}
 
             <input
                 type="text"
@@ -172,10 +168,10 @@ const InstructorDashboard = () => {
             {currentSession ? (
                 <div>
                     <p>
-                        <strong>{currentSession.name}</strong> (Session ID: {currentSession.session_id}) <br /> {/* Display session_id */}
+                        <strong>{currentSession.name}</strong> (Session ID: {currentSession.session_id}) <br />
                         Created At: {currentSession.formattedTime}
                     </p>
-                    <button onClick={() => fetchAttendance(currentSession.id)}>View Attendance</button>
+                    <button onClick={() => fetchAttendance(currentSession.session_id)}>View Attendance</button>
                 </div>
             ) : (
                 <p>No active session. Create one to get started.</p>
@@ -191,9 +187,8 @@ const InstructorDashboard = () => {
                             <h3>QR Code for Session</h3>
                             <QRCodeCanvas
                                 value={qrUrl}
-                                style={{ margin: "20px", border: "5px solid white" }} // Updated to white border
+                                style={{ margin: "20px", border: "5px solid white" }}
                             />
-
                             <p>Scan to join: <a href={qrUrl}>{qrUrl}</a></p>
                         </div>
                     )}

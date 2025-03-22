@@ -206,18 +206,20 @@ const AdminDashboard = () => {
                             <tr>
                                 <th>Session Name</th>
                                 <th>Instructor ID</th>
+                                <th>Session ID</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {sessions.length === 0 ? (
-                                <tr><td colSpan="4">No session records available</td></tr>
+                                <tr><td colSpan="5">No session records available</td></tr>
                             ) : (
                                 sessions.map((session) => (
                                     <tr key={session.id}>
                                         <td>{session.name}</td>
                                         <td>{session.instructor_id}</td>
+                                        <td>{session.session_id}</td>
                                         <td>{session.created_at}</td>
                                         <td>
                                             <button onClick={() => handleDeleteSession(session.id)}>Delete</button>

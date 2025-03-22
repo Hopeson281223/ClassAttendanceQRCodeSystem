@@ -226,33 +226,36 @@ def mark_attendance():
         print(f"Error marking attendance: {e}")
         return jsonify({"error": "An error occurred while marking attendance."}), 500
 
-@routes_bp.route("/api/attendance/<int:session_id>", methods=["GET"])
+@routes_bp.route("/api/attendance/<string:session_id>", methods=["GET"])
 @jwt_required()
-def view_attendance(session_id):
+def view_attendance(session_id):  # session_id is now a string
     try:
-        # Get current user ID
+        # Get the current user's ID from the JWT token
         current_user_id = get_jwt_identity()
 
-        # Check if the user is an instructor
+        # Retrieve the user from the database
         user = User.query.filter_by(user_id=current_user_id).first()
+
+        # Ensure the user is an instructor
         if not user or user.role != 'instructor':
             return jsonify({"error": "Only instructors can view attendance"}), 403
 
-        # Retrieve the session and ensure it belongs to the instructor
-        session = Session.query.filter_by(id=session_id, instructor_id=user.user_id).first()
+        # Retrieve the session using the 5-digit session_id
+        session = Session.query.filter_by(session_id=session_id, instructor_id=user.user_id).first()
         if not session:
             return jsonify({"error": "Session not found or does not belong to you"}), 404
 
         # Retrieve all attendance records for the session
-        attendance_records = Attendance.query.filter_by(session_id=session_id).all()
+        attendance_records = Attendance.query.filter_by(session_id=session.session_id).all()
 
+        # Format the response
         return jsonify({
-            "session_id": session.id,
-            "session_name": session.name,  # Include session name
+            "session_id": session.session_id,  # Use the 5-digit session_id
+            "session_name": session.name,  # Include the session name
             "attendance": [
                 {
                     "student_id": record.student_id,
-                    "timestamp": record.timestamp.strftime("%Y-%m-%d %H:%M:%S")  # Format date
+                    "timestamp": record.timestamp.strftime("%Y-%m-%d %H:%M:%S")  # Format the timestamp
                 }
                 for record in attendance_records
             ]
