@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://classattendanceqrcodesystem.onrender.com";
 
 const InstructorDashboard = () => {
     const [sessionName, setSessionName] = useState("");
