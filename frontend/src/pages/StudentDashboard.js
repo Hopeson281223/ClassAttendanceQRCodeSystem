@@ -88,7 +88,7 @@ const StudentDashboard = () => {
               return;
           }
   
-          console.log("Before const requestBody if (!session_id) {")
+          console.log("Before const requestBody if (!session_id) {");
 
           // Validate session_id
           if (!session_id) {
