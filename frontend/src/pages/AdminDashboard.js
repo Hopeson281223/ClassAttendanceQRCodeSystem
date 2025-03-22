@@ -123,11 +123,6 @@ const AdminDashboard = () => {
                             📊 Manage Records
                         </button>
                     </li>
-                    <li>
-                        <button onClick={handleLogout} className="logout-btn">
-                            Logout
-                        </button>
-                    </li>
                 </ul>
             </nav>
 
@@ -164,6 +159,11 @@ const AdminDashboard = () => {
                             )}
                         </tbody>
                     </table>
+                    <li>
+                        <button onClick={handleLogout} className="logout-btn">
+                            Logout
+                        </button>
+                    </li>
                 </div>
             )}
 
