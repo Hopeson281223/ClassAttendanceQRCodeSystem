@@ -33,7 +33,7 @@ def create_app():
         sys.exit(1)
 
     # CORS Configuration
-    cors_origins = os.getenv("CORS_ORIGIN", "http://localhost:3000").split(",")
+    cors_origins = os.getenv("CORS_ORIGIN", "https://class-attendance-qr-code-system.vercel.app/").split(",")
     CORS(app, resources={r"/api/*": {"origins": cors_origins}}, supports_credentials=True)
 
     # Initialize Flask extensions
