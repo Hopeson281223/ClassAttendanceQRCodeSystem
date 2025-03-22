@@ -82,10 +82,6 @@ const StudentDashboard = () => {
             const token = localStorage.getItem("token");
             const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-            console.log("Check below");
-            console.log("Token:", token);
-            console.log("user:", user);
-
             // Validate user and token
             if (!token || !user?.user_id || user?.role !== "student") {
                 setError("Unauthorized: Only students can mark attendance.");
@@ -95,6 +91,7 @@ const StudentDashboard = () => {
             // Validate session_id
             if (!session_id) {
                 setError("Invalid session ID. Please scan a valid QR code.");
+                console.log("Session id error")
                 return;
             }
 
