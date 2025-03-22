@@ -204,6 +204,10 @@ input:focus, select:focus {
   margin: 0 auto;
   padding: 20px;
   background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -212,7 +216,6 @@ input:focus, select:focus {
   margin: 20px auto;
   font-size: 24px;
   color: #333;
-  justify-content: center;
 }
 
 .admin-dashboard nav ul {
