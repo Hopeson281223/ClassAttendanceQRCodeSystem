@@ -198,14 +198,23 @@ const InstructorDashboard = () => {
             {attendance.length > 0 && currentSession && (
                 <div>
                     <h2>Attendance for {currentSession.name}</h2>
-                    <ul>
-                        {attendance.map((record, index) => (
-                            <li key={index}>
-                                Student ID: {record.student_id} - Timestamp: {new Date(record.timestamp).toLocaleString()}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {attendance.map((record, index) => (
+                                <tr key={index}>
+                                    <td>{record.student_id}</td>
+                                    <td>{new Date(record.timestamp).toLocaleString()}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+            </div>
             )}
 
             <div style={{ marginTop: "20px" }}>
