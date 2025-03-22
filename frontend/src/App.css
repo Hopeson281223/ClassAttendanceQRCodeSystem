@@ -209,7 +209,7 @@ input:focus, select:focus {
 }
 
 .admin-dashboard h1 {
-  margin-bottom: 20px;
+  margin: 20px auto;
   font-size: 24px;
   color: #333;
 }
