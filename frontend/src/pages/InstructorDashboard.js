@@ -150,7 +150,7 @@ const InstructorDashboard = () => {
     };
 
     return (
-        <div>
+        <div className="instructor-dashboard">
             <h1>Instructor Dashboard</h1>
             {instructorId && <h3>Instructor ID: {instructorId}</h3>}
 

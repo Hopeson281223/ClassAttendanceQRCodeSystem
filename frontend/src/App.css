@@ -295,6 +295,7 @@ input:focus, select:focus {
 }
 
 /* Instructor Dashboard */
+/* Instructor Dashboard */
 .instructor-dashboard {
   max-width: 800px;
   margin: 0 auto;
@@ -302,7 +303,10 @@ input:focus, select:focus {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Center align all text */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Center text */
 }
 
 .instructor-dashboard h1 {
@@ -313,23 +317,24 @@ input:focus, select:focus {
 
 .instructor-dashboard input {
   width: 100%;
-  max-width: 400px; /* Limit input width */
-  padding: 12px;
-  margin: 10px auto; /* Center input fields */
+  max-width: 300px; /* Smaller input width */
+  padding: 8px; /* Smaller padding */
+  margin: 10px 0; /* Spacing */
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 14px; /* Smaller font size */
   display: block; /* Ensure inputs are block-level for centering */
 }
 
 .instructor-dashboard button {
   background-color: #007bff;
   color: white;
-  padding: 10px 15px;
+  padding: 8px 12px; /* Smaller padding */
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin: 10px auto; /* Center buttons */
+  margin: 10px 0; /* Spacing */
+  font-size: 14px; /* Smaller font size */
   display: block; /* Ensure buttons are block-level for centering */
 }
 
@@ -348,9 +353,11 @@ input:focus, select:focus {
   background: white;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  max-width: 400px; /* Limit QR code container width */
-  margin-left: auto;
-  margin-right: auto; /* Center QR code container */
+  max-width: 300px; /* Smaller QR code container */
+  width: 100%; /* Full width on smaller screens */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center QR code content */
 }
 
 .instructor-dashboard .attendance-list {
@@ -358,6 +365,7 @@ input:focus, select:focus {
   padding: 0;
   margin-top: 20px;
   text-align: left; /* Align list text to the left */
+  width: 100%; /* Full width */
 }
 
 .instructor-dashboard .attendance-list li {
@@ -371,11 +379,12 @@ input:focus, select:focus {
 .instructor-dashboard .logout-btn {
   background-color: #dc3545;
   color: white;
-  padding: 10px 15px;
+  padding: 8px 12px; /* Smaller padding */
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin: 20px auto; /* Center logout button */
+  margin: 20px 0; /* Spacing */
+  font-size: 14px; /* Smaller font size */
   display: block; /* Ensure logout button is block-level for centering */
 }
 
@@ -460,6 +469,7 @@ input:focus, select:focus {
     padding: 6px; /* Even smaller padding for very small screens */
   }
 }
+
 /* Student Dashboard */
 .student-dashboard {
   max-width: 600px;
