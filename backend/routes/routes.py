@@ -75,7 +75,7 @@ def login():
 
         user = User.query.filter_by(email=data['email']).first()
         if not user or not check_password_hash(user.password, data['password']):
-            return jsonify({"error": "Invalid credentials, check or egister if you haven't."}), 401
+            return jsonify({"error": "Confirm credentials or register if you haven't."}), 401
 
         # Create JWT token with user_id and role as claims
         access_token = create_access_token(
