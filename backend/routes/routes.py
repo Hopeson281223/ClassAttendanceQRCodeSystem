@@ -300,11 +300,13 @@ def generate_qr(session_id):
 @jwt_required()
 def get_users():
     try:
+        # Check if the current user is an admin
         current_user_id = get_jwt_identity()
         user = User.query.filter_by(user_id=current_user_id).first()
         if not user or user.role != 'admin':
             return jsonify({"error": "Only admins can view users"}), 403
 
+        # Fetch and return all users
         users = User.query.all()
         return jsonify([{
             "user_id": u.user_id,
@@ -322,11 +324,13 @@ def get_users():
 @jwt_required()
 def get_all_attendance():
     try:
+        # Check if the current user is an admin
         current_user_id = get_jwt_identity()
         user = User.query.filter_by(user_id=current_user_id).first()
         if not user or user.role != 'admin':
             return jsonify({"error": "Only admins can view attendance"}), 403
 
+        # Fetch and return all attendance records
         attendance_records = Attendance.query.all()
         return jsonify([{
             "id": record.id,
@@ -344,11 +348,13 @@ def get_all_attendance():
 @jwt_required()
 def get_all_sessions():
     try:
+        # Check if the current user is an admin
         current_user_id = get_jwt_identity()
         user = User.query.filter_by(user_id=current_user_id).first()
         if not user or user.role != 'admin':
             return jsonify({"error": "Only admins can view all sessions"}), 403
 
+        # Fetch and return all sessions
         sessions = Session.query.all()
         return jsonify([{
             "id": s.id,
@@ -366,11 +372,13 @@ def get_all_sessions():
 @jwt_required()
 def delete_user(user_id):
     try:
+        # Check if the current user is an admin
         current_user_id = get_jwt_identity()
         user = User.query.filter_by(user_id=current_user_id).first()
         if not user or user.role != 'admin':
             return jsonify({"error": "Only admins can delete users"}), 403
 
+        # Find the user to delete
         user_to_delete = User.query.filter_by(user_id=user_id).first()
         if not user_to_delete:
             return jsonify({"error": "User not found"}), 404
@@ -386,6 +394,7 @@ def delete_user(user_id):
         return jsonify({"message": "User deleted successfully"}), 200
 
     except Exception as e:
+        db.session.rollback()
         print(f"Error deleting user: {e}")
         return jsonify({"error": f"An error occurred while deleting the user: {str(e)}"}), 500
 
@@ -394,11 +403,13 @@ def delete_user(user_id):
 @jwt_required()
 def delete_session(session_id):
     try:
+        # Check if the current user is an admin
         current_user_id = get_jwt_identity()
         user = User.query.filter_by(user_id=current_user_id).first()
         if not user or user.role != 'admin':
             return jsonify({"error": "Only admins can delete sessions"}), 403
 
+        # Find the session to delete
         session_to_delete = Session.query.filter_by(id=session_id).first()
         if not session_to_delete:
             return jsonify({"error": "Session not found"}), 404
@@ -413,6 +424,7 @@ def delete_session(session_id):
         return jsonify({"message": "Session deleted successfully"}), 200
 
     except Exception as e:
+        db.session.rollback()
         print(f"Error deleting session: {e}")
         return jsonify({"error": f"An error occurred while deleting the session: {str(e)}"}), 500
 
@@ -421,20 +433,24 @@ def delete_session(session_id):
 @jwt_required()
 def delete_attendance(attendance_id):
     try:
+        # Check if the current user is an admin
         current_user_id = get_jwt_identity()
         user = User.query.filter_by(user_id=current_user_id).first()
         if not user or user.role != 'admin':
             return jsonify({"error": "Only admins can delete attendance records"}), 403
 
+        # Find the attendance record to delete
         attendance_to_delete = Attendance.query.filter_by(id=attendance_id).first()
         if not attendance_to_delete:
             return jsonify({"error": "Attendance record not found"}), 404
 
+        # Delete the attendance record
         db.session.delete(attendance_to_delete)
         db.session.commit()
 
         return jsonify({"message": "Attendance record deleted successfully"}), 200
 
     except Exception as e:
+        db.session.rollback()
         print(f"Error deleting attendance record: {e}")
         return jsonify({"error": "An error occurred while deleting the attendance record."}), 500
