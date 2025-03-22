@@ -539,8 +539,10 @@ input:focus, select:focus {
 .student-dashboard button {
   background-color: #007bff;
   color: white;
+  margin: 20px auto;
   padding: 10px 15px;
   border-radius: 5px;
+  display: block;
   cursor: pointer;
   transition: background 0.3s ease;
 }
