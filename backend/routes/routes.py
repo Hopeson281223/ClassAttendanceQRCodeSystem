@@ -103,27 +103,34 @@ def login():
 @jwt_required()
 def create_session():
     try:
+        # Get the current user's ID from the JWT token
         current_user_id = get_jwt_identity()
+        
+        # Find the user (instructor) who is making the request
         user = User.query.filter_by(user_id=current_user_id).first()
         if not user or user.role != 'instructor':
             return jsonify({"error": "Only instructors can create sessions"}), 403
 
+        # Parse the data from the incoming request
         data = request.get_json()
         name = data.get("name", "").strip()
         if not name:
             return jsonify({"error": "Session name is required"}), 400
 
-        # Create and commit new session
+        # Create a new session with the instructor's user_id and the session name
         new_session = Session(name=name, instructor_id=user.user_id)
+        
+        # Add and commit the new session to the database
         db.session.add(new_session)
         db.session.commit()
 
-        # Retrieve session to include `created_at`
+        # Retrieve the session again to include `created_at` and `session_id` (5-digit code)
         created_session = Session.query.filter_by(id=new_session.id).first()
 
+        # Return the response with the necessary session details
         return jsonify({
             "message": "Session created successfully",
-            "session_id": created_session.id,
+            "session_id": created_session.session_id,  # Return the 5-digit session ID
             "name": created_session.name,
             "instructor_id": created_session.instructor_id,
             "created_at": created_session.created_at.strftime("%Y-%m-%d %H:%M:%S")  # Convert to readable format
@@ -132,6 +139,7 @@ def create_session():
     except Exception as e:
         print(f"Error during session creation: {e}")
         return jsonify({"error": "An error occurred during session creation."}), 500
+
 
 
 @routes_bp.route("/api/sessions", methods=["GET"])

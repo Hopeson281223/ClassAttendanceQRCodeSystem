@@ -52,16 +52,18 @@ def generate_unique_session_id():
 class Session(db.Model):
     __tablename__ = "sessions"
 
-    id = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)  # Default primary key
+    session_id = db.Column(db.String(5), unique=True, nullable=False, default=generate_unique_session_id)  # 5-digit unique ID
     name = db.Column(db.String(100), nullable=False)
     instructor_id = db.Column(db.String(50), db.ForeignKey("users.user_id"), nullable=False)  
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     # Relationships
-    attendances = db.relationship("Attendance", backref="session", lazy="select")
+    attendances = db.relationship("Attendance", backref="session", lazy="joined")
 
     def __repr__(self):
-        return f"<Session {self.name}, ID: {self.id}, Instructor: {self.instructor_id}>"
+        return f"<Session {self.name}, Session ID: {self.session_id}, Instructor: {self.instructor_id}>"
+
 
 class Attendance(db.Model):
     __tablename__ = "attendance"

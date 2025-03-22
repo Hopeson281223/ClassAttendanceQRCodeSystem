@@ -1,193 +1,265 @@
-/* General Styles */
-body {
-  font-family: 'Arial', sans-serif;
+/* Global Styles */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
   background-color: #f4f4f4;
+  text-align: center;
   color: #333;
+  line-height: 1.6;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  padding: 0;
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-input, select {
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  max-width: 300px;
-}
-
-/* Container Styles */
-.dashboard-container, .login-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Navigation Styles */
-nav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-nav ul li {
+h2 {
+  font-size: 20px;
+  color: #333;
   margin-bottom: 15px;
 }
 
-.nav-btn {
-  background-color: #007bff;
-  color: white;
-  width: 100%;
-  text-align: left;
+p {
+  font-size: 16px;
+  color: #666;
 }
 
-.nav-btn.active {
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+button:hover {
   background-color: #0056b3;
 }
 
-/* Table Styles */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
+button:active {
+  transform: scale(0.98);
 }
 
-table th, table td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
+/* Dashboard Container */
+.dashboard-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-table th {
-  background-color: #f4f4f4;
+.title {
+  font-size: 2em;
+  margin-bottom: 10px;
 }
 
-/* Form Styles */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.welcome-message {
+  font-size: 1.2em;
+  margin-bottom: 20px;
 }
 
-/* Button Styles */
+/* Buttons */
 .action-btn {
-  background-color: #28a745;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.start-btn {
+  background-color: #007bff;
   color: white;
 }
 
 .stop-btn {
   background-color: #dc3545;
+  color: white;
 }
 
 .logout-btn {
+  padding: 12px 20px;
   background-color: #dc3545;
   color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 20px;
 }
 
-/* QR Code Styles */
-.qr-reader {
-  margin: 20px 0;
-}
-
+/* Camera Container */
 .camera-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  position: relative;
+  width: 420px;
+  height: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.camera-feed {
-  border: 1px solid #ccc;
+/* Live Video Feed */
+.camera-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 10px;
+  z-index: 0;
 }
 
-/* Message Styles */
-.loading-message, .error-message, .success-message {
-  padding: 10px;
-  border-radius: 5px;
-  margin: 10px 0;
-  text-align: center;
+/* QR Reader Styles */
+.qr-reader {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.loading-message {
-  background-color: #ffc107;
-  color: #333;
+/* Loading and Error Messages */
+p.loading {
+  color: blue;
 }
 
-.error-message {
-  background-color: #dc3545;
-  color: white;
+p.error {
+  color: red;
+  margin-top: 10px;
 }
 
 .success-message {
-  background-color: #28a745;
+  color: green;
+  margin-top: 10px;
+}
+
+/* Buttons for Actions */
+button.logout {
+  background-color: #dc3545;
   color: white;
 }
 
-/* Responsive Styles */
+/* Form Styles */
+input, select {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Admin Dashboard Styles */
+.admin-dashboard {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-dashboard li {
+  margin-bottom: 15px;
+}
+
+.admin-dashboard a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 16px;
+}
+
+/* Instructor Dashboard Styles */
+.instructor-dashboard {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.instructor-dashboard input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.instructor-dashboard button {
+  margin: 10px 5px;
+}
+
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
-  .dashboard-container, .login-container {
-    padding: 10px;
-  }
-
-  input, select {
-    width: 100%;
-  }
-
-  table th, table td {
-    padding: 8px;
-  }
-
-  .camera-feed {
+  .camera-container {
     width: 100%;
     height: auto;
+    padding: 8px;
   }
 
   .qr-reader {
     width: 100%;
   }
+
+  button {
+    width: 100%;
+    padding: 14px;
+  }
 }
 
 @media (max-width: 480px) {
-  button {
-    width: 100%;
-    margin: 5px 0;
-  }
-
-  .nav-btn {
-    width: 100%;
-  }
-
   .camera-container {
     width: 100%;
+    height: 250px;
+  }
+
+  .qr-reader {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
   }
 }
