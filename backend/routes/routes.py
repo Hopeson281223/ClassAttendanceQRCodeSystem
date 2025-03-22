@@ -213,7 +213,7 @@ def mark_attendance():
         new_attendance = Attendance(
             student_id=user.user_id,
             session_id=session_id,  # Use session_id directly
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now()#test only timestamp=datetime.utcnow()
         )
         db.session.add(new_attendance)
         db.session.commit()
