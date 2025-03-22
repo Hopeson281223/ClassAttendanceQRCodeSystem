@@ -84,7 +84,7 @@ const StudentDashboard = () => {
 
             console.log("Check below");
             console.log("Token:", token);
-            console.log("user:", user)k;
+            console.log("user:", user);
 
             // Validate user and token
             if (!token || !user?.user_id || user?.role !== "student") {
