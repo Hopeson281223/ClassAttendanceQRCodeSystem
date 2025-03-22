@@ -190,3 +190,124 @@ body {
       width: 400px;
   }
 }
+
+/* General Styles */
+.dashboard-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.welcome-message {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Camera and QR Scanner Styles */
+.camera-container {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.camera-header {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.camera-feed {
+  border-radius: 5px;
+  max-width: 100%;
+}
+
+.qr-reader {
+  width: 100% !important;
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Buttons */
+.action-btn, .logout-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.start-btn {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.stop-btn, .logout-btn {
+  background-color: #d9534f; /* Red */
+  color: white;
+}
+
+.start-btn:hover {
+  background-color: #45a049;
+}
+
+.stop-btn:hover, .logout-btn:hover {
+  background-color: #c9302c;
+}
+
+/* Status Messages */
+.loading-message {
+  font-size: 16px;
+  color: #ff9800;
+  margin-top: 10px;
+}
+
+.error-message {
+  font-size: 16px;
+  color: red;
+  margin-top: 10px;
+}
+
+.success-message {
+  font-size: 16px;
+  color: green;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+      width: 90%;
+      padding: 15px;
+  }
+  
+  .title {
+      font-size: 20px;
+  }
+  
+  .welcome-message {
+      font-size: 14px;
+  }
+  
+  .action-btn, .logout-btn {
+      font-size: 14px;
+      padding: 10px 15px;
+  }
+}
