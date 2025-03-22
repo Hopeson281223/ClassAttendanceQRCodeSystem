@@ -1,4 +1,4 @@
-from extensions.extensions import db  # Assuming you have an extensions.py file for db setup
+from extensions.extensions import db
 from enum import Enum
 from datetime import datetime
 import random
@@ -32,36 +32,12 @@ class User(db.Model):
     def __repr__(self):
         return f"<User {self.username}, Role: {self.role}, User ID: {self.user_id}>"
 
-    @staticmethod
-    def generate_unique_user_id(role):
-        """Generate a unique user ID based on role."""
-        if not UserRole.is_valid(role):
-            raise ValueError(f"Invalid role: {role}")
-
-        prefix = role[:3].lower()
-        while True:
-            unique_number = random.randint(10000, 99999)
-            user_id = f"{prefix}_{unique_number}"
-            # Ensure the user ID is unique
-            if not db.session.query(User).filter_by(user_id=user_id).first():
-                return user_id
-
-
-def generate_unique_session_id():
-    """Generate a unique 5-digit session ID."""
-    while True:
-        session_id = random.randint(10000, 99999)  # Generate random 5-digit number
-        session_id_str = str(session_id)  # Convert to string
-        # Ensure the session_id is unique in the database
-        if not db.session.query(Session).filter_by(session_id=session_id_str).first():
-            return session_id_str  # Return as string
-
 
 class Session(db.Model):
     __tablename__ = "sessions"
 
     id = db.Column(db.Integer, primary_key=True)  # Default primary key
-    session_id = db.Column(db.String(5), unique=True, nullable=False, default=generate_unique_session_id)  # 5-digit unique ID
+    session_id = db.Column(db.String(5), unique=True, nullable=False, default=None)  # 5-digit unique ID
     name = db.Column(db.String(100), nullable=False)
     instructor_id = db.Column(db.String(50), db.ForeignKey("users.user_id"), nullable=False)  
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -72,7 +48,23 @@ class Session(db.Model):
     def __repr__(self):
         return f"<Session {self.name}, Session ID: {self.session_id}, Instructor: {self.instructor_id}>"
 
+    @staticmethod
+    def generate_unique_session_id():
+        """Generate a unique 5-digit session ID."""
+        while True:
+            session_id = random.randint(10000, 99999)  # Generate random 5-digit number
+            session_id_str = str(session_id)  # Convert to string
+            # Ensure the session_id is unique in the database
+            if not db.session.query(Session).filter_by(session_id=session_id_str).first():
+                return session_id_str  # Return as string
 
+    def __init__(self, **kwargs):
+        """Override the __init__ method to generate a session ID on creation."""
+        super().__init__(**kwargs)
+        if not self.session_id:
+            self.session_id = self.generate_unique_session_id()
+
+# Attendance model remains unchanged.
 class Attendance(db.Model):
     __tablename__ = "attendance"
 

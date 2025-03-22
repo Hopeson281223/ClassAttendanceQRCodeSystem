@@ -141,7 +141,6 @@ def create_session():
         return jsonify({"error": "An error occurred during session creation."}), 500
 
 
-
 @routes_bp.route("/api/sessions", methods=["GET"])
 @jwt_required()
 def get_sessions():
