@@ -15,7 +15,7 @@ routes_bp = Blueprint("routes", __name__)
 CORS(routes_bp)
 
 # Define API Base URL
-API_BASE_URL = os.getenv("API_BASE_URL", "http://127.0.0.1:5000")
+API_BASE_URL = os.getenv("API_BASE_URL", "https://classattendanceqrcodesystem.onrender.com")
 
 @routes_bp.route("/", methods=["GET"])
 def home():
