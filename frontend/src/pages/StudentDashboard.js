@@ -75,6 +75,7 @@ const StudentDashboard = () => {
 
     // Mark Attendance
     const handleMarkAttendance = async (session_id) => {
+        console.log("Data type of session_id in handle att:", typeof session_id);
         setLoading(true);
         setError(""); // Clear any previous error
         setSuccessMessage(""); // Clear any previous success message
