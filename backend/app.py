@@ -33,7 +33,7 @@ def create_app():
         sys.exit(1)
 
     # CORS Configuration
-    cors_origins = os.getenv("CORS_ORIGIN", "https://class-attendance-qr-code-system.vercel.app/").split(",")
+    cors_origins = os.getenv("CORS_ORIGIN", "https://class-attendance-qr-code-system.vercel.app").split(",")
     CORS(app, resources={r"/api/*": {"origins": cors_origins}}, supports_credentials=True)
 
     # Initialize Flask extensions
@@ -46,15 +46,18 @@ def create_app():
 
     @app.after_request
     def add_cors_headers(response):
+        """Add necessary CORS headers to each response."""
         response.headers["Access-Control-Allow-Origin"] = ",".join(cors_origins)
         response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"  # Allow all HTTP methods
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
         return response
 
     # Ensure database connection works
     with app.app_context():
         try:
             with db.engine.connect() as connection:
-                connection.execute(text("SELECT 1"))  
+                connection.execute(text("SELECT 1"))  # Simple query to check database connectivity
             print("✅ Database connected successfully!")
         except OperationalError as e:
             print(f"❌ Database Connection Error: {e}")
