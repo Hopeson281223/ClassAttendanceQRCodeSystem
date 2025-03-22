@@ -2,75 +2,63 @@ from flask import Flask
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
+from sqlalchemy.exc import OperationalError
+from sqlalchemy import text
+import os
+import sys
+from dotenv import load_dotenv  
+
+# Load .env
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path, override=True)
+else:
+    print("⚠️ .env file not found! Ensure it exists in the backend directory.")
+
 from config import Config
 from extensions.extensions import db
-from routes.routes import routes_bp  # Correct import
-from sqlalchemy.exc import OperationalError
-from psycopg2 import connect, errors
-import os
-
-def create_database():
-    """Ensures that the PostgreSQL database exists before connecting."""
-    db_url = os.getenv("DATABASE_URL")
-    if not db_url:
-        raise RuntimeError("DATABASE_URL is not set in the environment!")
-
-    # Extract database name from the URL
-    db_name = db_url.rsplit("/", 1)[-1]
-    db_url_without_db = db_url.rsplit("/", 1)[0]  # Remove database name to connect to the server
-
-    # Connect to PostgreSQL and create the database if it doesn't exist
-    try:
-        conn = connect(db_url)
-        conn.close()  # Database exists, no need to create
-    except errors.InvalidCatalogName:
-        # If database doesn't exist, create it
-        print(f"Database '{db_name}' not found. Creating it now...")
-        admin_conn = connect(db_url_without_db + "/postgres")  # Connect to default `postgres` DB
-        admin_conn.autocommit = True
-        cursor = admin_conn.cursor()
-        cursor.execute(f"CREATE DATABASE {db_name};")
-        cursor.close()
-        admin_conn.close()
-        print(f"Database '{db_name}' created successfully.")
+from routes.routes import routes_bp  
 
 def create_app():
+    """Initializes the Flask app."""
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # Ensure the database is created before initializing app
-    create_database()
+    # Debugging: Print database URL
+    print(f"🛠️ DATABASE_URL from .env: {os.getenv('DATABASE_URL')}")  
 
-    # Initialize extensions
-    CORS(
-        app,
-        resources={r"/api/*": {"origins": "http://localhost:3000"}},
-        supports_credentials=True,
-        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Allow DELETE method
-        allow_headers=["Content-Type", "Authorization"]  # Allow necessary headers
-    )
+    # Check if DATABASE_URL is set
+    if not os.getenv("DATABASE_URL"):
+        app.logger.error("❌ DATABASE_URL is missing! Check your .env file.")
+        sys.exit(1)
+
+    # CORS Configuration
+    cors_origins = os.getenv("CORS_ORIGIN", "http://localhost:3000").split(",")
+    CORS(app, resources={r"/api/*": {"origins": cors_origins}}, supports_credentials=True)
+
+    # Initialize Flask extensions
     db.init_app(app)
-    migrate = Migrate(app, db)
+    Migrate(app, db)
     JWTManager(app)
 
-    # Register Routes
-    app.register_blueprint(routes_bp)  # Corrected method
+    # Register routes
+    app.register_blueprint(routes_bp)
 
     @app.after_request
     def add_cors_headers(response):
-        response.headers["Access-Control-Allow-Origin"] = "http://localhost:3000"
+        response.headers["Access-Control-Allow-Origin"] = ",".join(cors_origins)
         response.headers["Access-Control-Allow-Credentials"] = "true"
-        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"  # Allow DELETE method
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
         return response
 
-    # Create tables if they don't exist
+    # Ensure database connection works
     with app.app_context():
         try:
-            db.create_all()
-            print("All tables are ensured to exist.")
+            with db.engine.connect() as connection:
+                connection.execute(text("SELECT 1"))  
+            print("✅ Database connected successfully!")
         except OperationalError as e:
-            print(f"Database Error: {e}")
+            print(f"❌ Database Connection Error: {e}")
+            sys.exit(1)
 
     return app
 

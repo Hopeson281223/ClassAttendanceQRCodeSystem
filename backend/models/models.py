@@ -23,8 +23,8 @@ class User(db.Model):
     user_id = db.Column(db.String(50), unique=True, nullable=False)
 
     # Relationships
-    sessions = db.relationship("Session", backref="instructor", lazy="joined")
-    attendances = db.relationship("Attendance", backref="student", lazy="joined")
+    sessions = db.relationship("Session", backref="instructor", lazy="select")
+    attendances = db.relationship("Attendance", backref="student", lazy="select")
 
     def __repr__(self):
         return f"<User {self.username}, Role: {self.role}, User ID: {self.user_id}>"
@@ -32,6 +32,9 @@ class User(db.Model):
     @staticmethod
     def generate_unique_user_id(role):
         """Generate a unique user ID based on role."""
+        if not UserRole.is_valid(role):
+            raise ValueError(f"Invalid role: {role}")
+
         prefix = role[:3].lower()
         while True:
             unique_number = random.randint(10000, 99999)
@@ -39,27 +42,26 @@ class User(db.Model):
             if not db.session.query(User).filter_by(user_id=user_id).first():
                 return user_id
 
-# Move this function above the Session class to prevent reference issues
-def generate_unique_session_id():
-    """Generate a unique 5-digit session ID."""
-    while True:
-        session_id = random.randint(10000, 99999)
-        if not db.session.query(Session).filter_by(id=session_id).first():
-            return session_id
-
 class Session(db.Model):
     __tablename__ = "sessions"
 
-    id = db.Column(db.Integer, primary_key=True, unique=True, default=generate_unique_session_id)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
     name = db.Column(db.String(100), nullable=False)
     instructor_id = db.Column(db.String(50), db.ForeignKey("users.user_id"), nullable=False)  
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     # Relationships
-    attendances = db.relationship("Attendance", backref="session", lazy="joined")
+    attendances = db.relationship("Attendance", backref="session", lazy="select")
 
     def __repr__(self):
         return f"<Session {self.name}, ID: {self.id}, Instructor: {self.instructor_id}>"
+
+    def generate_unique_session_id():
+        """Generate a unique 5-digit session ID."""
+        while True:
+            session_id = random.randint(10000, 99999)
+            if not db.session.query(Session).filter_by(id=session_id).first():
+                return session_id
 
 class Attendance(db.Model):
     __tablename__ = "attendance"
