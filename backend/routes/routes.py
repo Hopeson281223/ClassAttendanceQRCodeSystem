@@ -374,14 +374,18 @@ def delete_user(user_id):
     try:
         # Check if the current user is an admin
         current_user_id = get_jwt_identity()
-        user = User.query.filter_by(user_id=current_user_id).first()
-        if not user or user.role != 'admin':
+        current_user = User.query.filter_by(user_id=current_user_id).first()
+        if not current_user or current_user.role != 'admin':
             return jsonify({"error": "Only admins can delete users"}), 403
 
         # Find the user to delete
         user_to_delete = User.query.filter_by(user_id=user_id).first()
         if not user_to_delete:
             return jsonify({"error": "User not found"}), 404
+
+        # Prevent deletion if the user to delete is an admin
+        if user_to_delete.role == 'admin':
+            return jsonify({"error": "Cannot delete an admin user"}), 403
 
         # Delete related records (e.g., attendance, sessions)
         Attendance.query.filter_by(student_id=user_id).delete()
@@ -398,7 +402,6 @@ def delete_user(user_id):
         print(f"Error deleting user: {e}")
         return jsonify({"error": f"An error occurred while deleting the user: {str(e)}"}), 500
 
-# Delete a session (Admin only)
 # Delete a session (Admin only)
 @routes_bp.route('/api/sessions/<int:session_id>', methods=['DELETE'])  # Use integer for session_id
 @jwt_required()
