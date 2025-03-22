@@ -55,7 +55,7 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div className="register-container">
             <h2>Register</h2>
             <input 
                 type="text"
