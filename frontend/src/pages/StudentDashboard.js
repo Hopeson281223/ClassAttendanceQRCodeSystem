@@ -122,13 +122,6 @@ const StudentDashboard = () => {
     }
   };
 
-  const handleManualInput = () => {
-    const sessionId = prompt("Please enter the session ID:");
-    if (sessionId) {
-      handleMarkAttendance(sessionId);
-    }
-  };
-
   return (
     <div style={{ padding: "20px" }}>
       <h1>Student Dashboard</h1>
@@ -148,22 +141,6 @@ const StudentDashboard = () => {
         }}
       >
         {cameraStarted ? "Stop Scanning" : "Scan QR Code"}
-      </button>
-
-      <button
-        onClick={handleManualInput}
-        style={{
-          marginBottom: "10px",
-          padding: "10px 20px",
-          backgroundColor: "#28a745",
-          color: "#fff",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-          fontSize: "16px",
-        }}
-      >
-        Enter Session ID Manually
       </button>
 
       {cameraStarted && (

@@ -358,27 +358,33 @@ input:focus, select:focus {
 
 .student-dashboard .camera-container {
   position: relative;
-  width: 100%;
-  height: 300px;
-  margin-top: 20px;
-  background: #000;
-  border-radius: 10px;
+  width: 420px;
+  height: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  border-radius: 8px;
   overflow: hidden;
 }
 
 .student-dashboard .camera-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.student-dashboard .qr-reader {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  z-index: 0;
+}
+
+.student-dashboard .qr-reader {
+  position: relative;
   z-index: 1;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .student-dashboard button {
