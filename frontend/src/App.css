@@ -424,7 +424,7 @@ input:focus, select:focus {
 
 .student-dashboard .camera-container video {
   width: 70%; /* Make video fill the container */
-  height: 80%; /* Make video fill the container */
+  height: 70%; /* Make video fill the container */
   object-fit: cover; /* Ensure video covers the container */
   border-radius: 8px; /* Match container's border radius */
   display: block; /* Ensure the video behaves as a block element */
@@ -433,7 +433,7 @@ input:focus, select:focus {
 
 .student-dashboard .qr-reader {
   width: 70%; /* Make QR reader fill the container */
-  height: 80%; /* Make QR reader fill the container */
+  height: 70%; /* Make QR reader fill the container */
   object-fit: cover; /* Ensure QR reader covers the container */
   border-radius: 8px; /* Match container's border radius */
   display: block; /* Ensure the QR reader behaves as a block element */
@@ -459,7 +459,6 @@ input:focus, select:focus {
 
 .student-dashboard .error-message {
   color: red;
-  margin-top: 10px;
 }
 
 /* Responsive Design */
