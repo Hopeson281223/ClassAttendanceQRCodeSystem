@@ -370,11 +370,17 @@ input:focus, select:focus {
   overflow: hidden; /* Ensure nothing overflows the container */
 }
 
+.student-dashboard .camera-container h3 {
+  display: flex;
+  justify-content: center;
+}
+
 .student-dashboard .camera-container video {
   position: absolute;
+  margin: 10px auto;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 80%;
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
