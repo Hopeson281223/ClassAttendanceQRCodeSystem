@@ -349,6 +349,7 @@ input:focus, select:focus {
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Ensure nothing overflows the dashboard */
 }
 
 .student-dashboard h1 {
@@ -359,13 +360,14 @@ input:focus, select:focus {
 
 .student-dashboard .camera-container {
   position: relative;
-  width: 420px;
-  height: 320px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%; /* Make it responsive */
+  max-width: 420px; /* Set a maximum width */
+  height: auto; /* Adjust height automatically */
+  aspect-ratio: 4 / 3; /* Maintain aspect ratio (4:3 for video) */
+  margin: 0 auto; /* Center the container */
   background-color: white;
   border-radius: 8px;
-  overflow: hidden;
+  overflow: hidden; /* Ensure nothing overflows the container */
 }
 
 .student-dashboard .camera-container video {
@@ -412,28 +414,19 @@ input:focus, select:focus {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .login-container, .register-container, .admin-dashboard, .instructor-dashboard, .student-dashboard {
+  .student-dashboard {
     width: 90%;
     padding: 15px;
   }
 
   .student-dashboard .camera-container {
-    height: 250px;
+    max-width: 100%; /* Allow it to take full width on smaller screens */
+    aspect-ratio: 16 / 9; /* Adjust aspect ratio for mobile */
   }
-
-  .student-dashboard .camera-container video {
-    width: auto;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    z-index: 0;
-  }
-  
 }
 
 @media (max-width: 480px) {
   .student-dashboard .camera-container {
-    height: 200px;
-
+    aspect-ratio: 1 / 1; /* Square aspect ratio for very small screens */
   }
 }
