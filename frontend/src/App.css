@@ -433,6 +433,11 @@ input:focus, select:focus {
     max-width: 100%; /* Allow it to take full width on smaller screens */
     aspect-ratio: 16 / 9; /* Adjust aspect ratio for mobile */
   }
+
+  .student-dashboard .camera-container video {
+    margin: 5px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
 }
 
 @media (max-width: 480px) {
