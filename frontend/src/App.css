@@ -377,7 +377,7 @@ input:focus, select:focus {
 
 .student-dashboard .camera-container video {
   position: absolute;
-  margin: 10px auto;
+  margin-left: 20px;
   top: 0;
   left: 0;
   width: 80%;
@@ -387,7 +387,7 @@ input:focus, select:focus {
   object-fit: cover;
   border-radius: 10px;
   z-index: 3;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .student-dashboard .qr-reader {
@@ -435,8 +435,8 @@ input:focus, select:focus {
   }
 
   .student-dashboard .camera-container video {
-    margin: 5px auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-left: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   }
 }
 
