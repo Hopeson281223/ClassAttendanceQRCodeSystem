@@ -379,15 +379,11 @@ input:focus, select:focus {
 
 .student-dashboard .camera-container video {
   position: relative;
-  top: 1;
-  left: 1;
-  margin: 20px;
-  padding: 15px;
-  width: 50%;
-  height: 50%;
-  display: flex;
-  justify-content: center;
-  object-fit: cover;
+  top: 0;
+  left: 0;
+  width: 100%; /* Make video fill the container */
+  height: 100%; /* Make video fill the container */
+  object-fit: cover; /* Ensure the video covers the area without distortion */
   border-radius: 10px;
   z-index: 3;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
@@ -395,10 +391,10 @@ input:focus, select:focus {
 
 .student-dashboard .qr-reader {
   position: relative;
-  top: 1;
-  left: 1;
+  top: 0;
+  left: 0;
   margin: 10px auto;
-  border: #333;
+  border: 1px solid #333; /* Add border for better visibility */
   object-fit: cover;
   padding: 10px;
   z-index: 1;
@@ -444,7 +440,7 @@ input:focus, select:focus {
   }
 
   .student-dashboard .camera-container video {
-    margin-left: 10px;
+    margin-left: 0; /* Remove unnecessary margin */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   }
 }
