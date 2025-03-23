@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { QrReader } from "@blackbox-vision/react-qr-reader";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -12,16 +12,12 @@ const StudentDashboard = () => {
   const [cameraStarted, setCameraStarted] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
-  const mediaStreamRef = useRef(null);
-
-  // Check Camera permissions and availability
   useEffect(() => {
     const checkCamera = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        mediaStreamRef.current = stream; // Store the stream to stop it later
         console.log("Camera access granted");
-        stream.getTracks().forEach((track) => track.stop()); // Immediately stop the stream after checking
+        stream.getTracks().forEach(track => track.stop());
       } catch (err) {
         console.error("Camera access denied:", err);
         setError("Unable to access the camera. Please check your permissions and ensure your camera is connected.");
@@ -30,22 +26,20 @@ const StudentDashboard = () => {
     checkCamera();
   }, []);
 
-  // Handle QR scan results
   const handleScan = (result) => {
     if (result?.text) {
       console.log("Scanned QR Data:", result.text);
-
-      const session_id = extractSessionId(result.text); // Extract session_id
+      let session_id = extractSessionId(result.text);
       console.log("Extracted Session ID:", session_id);
-
       if (session_id) {
         setScannedData(session_id);
-        handleMarkAttendance(session_id); // Mark attendance using session_id
-        stopCamera(); // Stop the camera feed after successful scan
-        setError(""); // Clear any previous errors
-
+        handleMarkAttendance(session_id);
+        stopCamera();
+        setError("");
         setSuccessMessage("QR Code Scanned Successfully! Marking attendance...");
-        setTimeout(() => setSuccessMessage(""), 3000); // Auto hide success message after 3 seconds
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 3000);
       } else {
         setError("Invalid QR code format. Please scan a valid code.");
       }
@@ -63,66 +57,32 @@ const StudentDashboard = () => {
   const extractSessionId = (text) => {
     try {
       const parsedData = JSON.parse(text);
-      return parsedData.session_id || null; // Extract session_id from JSON
+      return parsedData.session_id || null;
     } catch (error) {
-      const match = text.match(/\/?session\/(\d+)/); // Extract session_id from URL
+      const match = text.match(/\/?session\/(\d+)/);
       return match ? match[1] : null;
     }
   };
 
-  // Mark Attendance
   const handleMarkAttendance = async (session_id) => {
-    try {
-      setLoading(true);
-      setError("");
-      setSuccessMessage("");
+    setLoading(true);
+    setError("");
 
-      // Retrieve token and user data from localStorage
+    try {
       const token = localStorage.getItem("token");
       const user = JSON.parse(localStorage.getItem("user") || "{}");
-
-      // Log the user object for debugging
-      console.log("User Object from localStorage:", user);
-
-      // Validate user and token
-      if (!token) {
-        console.log("Validation failed: Missing token.");
-        setError("Unauthorized: Please log in again.");
-        return;
-      }
-
-      if (!user?.id) {
-        console.log("Validation failed: Missing user ID.");
-        setError("Unauthorized: User ID is missing. Please log in again.");
-        return;
-      }
-
-      if (user?.role !== "student") {
-        console.log("Validation failed: Invalid role.");
+      
+      if (!token || !user?.id || user?.role !== "student") {
         setError("Unauthorized: Only students can mark attendance.");
         return;
       }
 
-      // Validate session_id
-      if (!session_id) {
-        console.log("Validation failed: Invalid session_id.");
-        setError("Invalid session ID. Please scan a valid QR code.");
-        return;
-      }
+      console.log("Attempting to mark attendance for session:", session_id);
+      console.log("User Info:", user);
 
-      // Prepare the request body
-      const requestBody = {
-        session_id: session_id,
-      };
-
-      // Log the request body and token for debugging
-      console.log("Request Body:", requestBody);
-      console.log("Token:", token);
-
-      // Make API call to mark attendance
       const response = await axios.post(
-        "https://classattendanceqrcodesystem.onrender.com/api/attendance",
-        requestBody,
+        "http://localhost:5000/api/attendance",
+        { session_id },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -131,92 +91,87 @@ const StudentDashboard = () => {
         }
       );
 
-      // Log the API response for debugging
       console.log("API Response:", response);
 
-      // Handle API response
-      if (response.status === 201) {
-        setSuccessMessage("Attendance marked successfully!");
-        alert("Attendance marked successfully!");
+      if (response.data.message) {
+        alert(response.data.message);
       } else {
         setError("Error marking attendance. Please try again.");
       }
+      setScannedData("");
     } catch (error) {
-      console.error("API Error Details:", error);
-      if (error.response) {
-        setError(error.response.data?.error || "An error occurred while marking attendance.");
-      } else if (error.request) {
-        setError("Network error. Please check your internet connection.");
-      } else {
-        setError("An unexpected error occurred. Please try again.");
-      }
+      console.error("API Error:", error);
+      setError(error.response?.data?.error || "Error marking attendance. Please try again.");
     } finally {
       setLoading(false);
-      setScannedData("");
     }
   };
 
-  // Start & Stop Camera feed
-  const startCamera = async () => {
-    try {
-      console.log("Starting camera...");
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      mediaStreamRef.current = stream; // Store the stream to stop it later
-      setCameraStarted(true); // Start camera feed
-      console.log("Camera started successfully.");
-    } catch (error) {
-      console.error("Error accessing the camera: ", error.name, error.message);
-      setError("Unable to access the camera. Please check your permissions and ensure your camera is connected.");
-    }
+  const startCamera = () => {
+    setCameraStarted(true);
   };
 
   const stopCamera = () => {
-    if (mediaStreamRef.current) {
-      console.log("Stopping camera...");
-      const tracks = mediaStreamRef.current.getTracks();
-      tracks.forEach((track) => track.stop()); // Stop all tracks
-      mediaStreamRef.current = null; // Clear the media stream reference
-    }
-    setCameraStarted(false); // Stop camera feed
-    console.log("Camera stopped.");
+    setCameraStarted(false);
   };
 
-  // Cleanup on component unmount
-  useEffect(() => {
-    return () => {
-      stopCamera();
-    };
-  }, []);
-
-  // Logout
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to log out?")) {
-      stopCamera();
       localStorage.clear();
       navigate("/login");
     }
   };
 
-  return (
-    <div className="student-dashboard">
-      <h1 className="title">Student Dashboard</h1>
-      <p className="welcome-message">Welcome, Student! Scan the QR code to mark your attendance.</p>
+  const handleManualInput = () => {
+    const sessionId = prompt("Please enter the session ID:");
+    if (sessionId) {
+      handleMarkAttendance(sessionId);
+    }
+  };
 
-      {/* Start/Stop Camera Button */}
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>Student Dashboard</h1>
+      <p>Welcome, Student! Scan the QR code to mark your attendance.</p>
+
       <button
         onClick={cameraStarted ? stopCamera : startCamera}
-        className={`action-btn ${cameraStarted ? "stop-btn" : "start-btn"}`}
+        style={{
+          marginBottom: "10px",
+          padding: "10px 20px",
+          backgroundColor: cameraStarted ? "#dc3545" : "#007bff",
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer",
+          fontSize: "16px",
+        }}
       >
         {cameraStarted ? "Stop Scanning" : "Scan QR Code"}
       </button>
 
-      {/* Camera and QR Reader */}
+      <button
+        onClick={handleManualInput}
+        style={{
+          marginBottom: "10px",
+          padding: "10px 20px",
+          backgroundColor: "#28a745",
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer",
+          fontSize: "16px",
+        }}
+      >
+        Enter Session ID Manually
+      </button>
+
       {cameraStarted && (
         <div className="camera-container">
-          <h3 className="camera-header">Scan QR Code</h3>
+          <h3>Scan QR Code</h3>
           <QrReader
             constraints={{
-              facingMode: "environment", // Use the rear camera
+              facingMode: "environment",
               width: { ideal: 400 },
               height: { ideal: 300 },
             }}
@@ -227,13 +182,29 @@ const StudentDashboard = () => {
         </div>
       )}
 
-      {/* Loading, Error, and Success Messages */}
-      {loading && <p className="loading-message">Loading...</p>}
-      {error && <p className="error-message">{error}</p>}
-      {successMessage && <div className="success-message">{successMessage}</div>}
+      {loading && <p style={{ color: "blue" }}>Loading...</p>}
 
-      {/* Logout Button */}
-      <button onClick={handleLogout} className="logout-btn">
+      {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+
+      {successMessage && (
+        <div style={{ color: "green", marginTop: "10px" }}>
+          {successMessage}
+        </div>
+      )}
+
+      <button
+        onClick={handleLogout}
+        style={{
+          marginTop: "20px",
+          padding: "10px 20px",
+          backgroundColor: "#dc3545",
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer",
+          fontSize: "16px",
+        }}
+      >
         Logout
       </button>
     </div>
