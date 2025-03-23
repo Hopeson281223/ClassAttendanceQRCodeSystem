@@ -420,11 +420,20 @@ input:focus, select:focus {
   .student-dashboard .camera-container {
     height: 250px;
   }
+
+  .student-dashboard .camera-container video {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    z-index: 0;
+  }
+  
 }
 
 @media (max-width: 480px) {
   .student-dashboard .camera-container {
     height: 200px;
-    
+
   }
 }
