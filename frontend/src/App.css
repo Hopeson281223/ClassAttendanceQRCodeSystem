@@ -190,7 +190,6 @@ input:focus, select:focus {
 .admin-dashboard table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px; /* Set a minimum width for the table */
 }
 
 .admin-dashboard table, th, td {
@@ -473,15 +472,6 @@ input:focus, select:focus {
     aspect-ratio: 16 / 9; /* Adjust aspect ratio for mobile */
   }
 
-  .student-dashboard .camera-container video {
-    width: 70%; /* Adjust video width for smaller screens */
-    height: 80%; /* Adjust video height for smaller screens */
-  }
-
-  .student-dashboard .qr-reader {
-    width: 70%; /* Adjust QR reader width for smaller screens */
-    height: 80%; /* Adjust QR reader height for smaller screens */
-  }
 }
 
 @media (max-width: 480px) {
