@@ -417,7 +417,7 @@ input:focus, select:focus {
 }
 
 .student-dashboard .camera-container video {
-  width: 70%; /* Make video fill the container */
+  width: 60%; /* Make video fill the container */
   height: 50%; /* Make video fill the container */
   object-fit: cover; /* Ensure video covers the container */
   border-radius: 8px; /* Match container's border radius */
@@ -426,7 +426,7 @@ input:focus, select:focus {
 }
 
 .student-dashboard .qr-reader {
-  width: 70%;
+  width: 60%;
   height: 50%; 
   object-fit: cover; /* Ensure QR reader covers the container */
   border-radius: 8px; /* Match container's border radius */
