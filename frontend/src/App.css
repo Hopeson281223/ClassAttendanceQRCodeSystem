@@ -382,6 +382,8 @@ input:focus, select:focus {
   left: 0;
   width: 80%;
   height: 80%;
+  display: flex;
+  justify-content: center;
   object-fit: cover;
   border-radius: 10px;
   z-index: 3;
@@ -391,6 +393,8 @@ input:focus, select:focus {
 .student-dashboard .qr-reader {
   position: relative;
   z-index: 1;
+  display: flex;
+  justify-content: center;
   width: 80%;
   height: 80%;
   border-radius: 10px;
