@@ -378,35 +378,21 @@ input:focus, select:focus {
 }
 
 .student-dashboard .camera-container video {
-  position: relative;
-  top: 1;
-  left: 1;
-  margin: 20px;
-  padding: 15px;
-  width: 50%;
-  height: 50%;
-  display: flex;
-  justify-content: center;
-  object-fit: cover;
-  border-radius: 10px;
-  z-index: 3;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  width: 80%; /* Make video fill the container */
+  height: 80%; /* Make video fill the container */
+  object-fit: cover; /* Ensure video covers the container */
+  border-radius: 8px; /* Match container's border radius */
+  display: block; /* Ensure the video behaves as a block element */
+  margin: 0 auto; /* Center the video horizontally */
 }
 
 .student-dashboard .qr-reader {
-  position: relative;
-  top: 1;
-  left: 1;
-  margin: 10px auto;
-  border: #333;
-  object-fit: cover;
-  padding: 10px;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  width: 80%;
-  height: 80%;
-  border-radius: 10px;
+  width: 80%; /* Make QR reader fill the container */
+  height: 80%; /* Make QR reader fill the container */
+  object-fit: cover; /* Ensure QR reader covers the container */
+  border-radius: 8px; /* Match container's border radius */
+  display: block; /* Ensure the QR reader behaves as a block element */
+  margin: 0 auto; /* Center the QR reader horizontally */
 }
 
 .student-dashboard button {
@@ -444,8 +430,13 @@ input:focus, select:focus {
   }
 
   .student-dashboard .camera-container video {
-    margin-left: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    width: 60%; /* Adjust video width for smaller screens */
+    height: 80%; /* Adjust video height for smaller screens */
+  }
+
+  .student-dashboard .qr-reader {
+    width: 60%; /* Adjust QR reader width for smaller screens */
+    height: 80%; /* Adjust QR reader height for smaller screens */
   }
 }
 
@@ -454,4 +445,3 @@ input:focus, select:focus {
     aspect-ratio: 1 / 1; /* Square aspect ratio for very small screens */
   }
 }
-
