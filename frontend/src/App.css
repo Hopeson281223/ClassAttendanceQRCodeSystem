@@ -365,6 +365,7 @@ input:focus, select:focus {
   height: auto; /* Adjust height automatically */
   aspect-ratio: 4 / 3; /* Maintain aspect ratio (4:3 for video) */
   margin: 0 auto; /* Center the container */
+  padding: 5px;
   background-color: white;
   border-radius: 8px;
   overflow: hidden; /* Ensure nothing overflows the container */
@@ -377,13 +378,13 @@ input:focus, select:focus {
 }
 
 .student-dashboard .camera-container video {
-  position: absolute;
+  position: relative;
+  top: 1;
+  left: 1;
   margin: 20px;
-  padding: 5px;
-  top: 0;
-  left: 0;
-  width: 70%;
-  height: 70%;
+  padding: 15px;
+  width: 50%;
+  height: 50%;
   display: flex;
   justify-content: center;
   object-fit: cover;
