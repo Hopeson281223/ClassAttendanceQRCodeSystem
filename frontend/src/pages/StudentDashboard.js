@@ -123,8 +123,8 @@ const StudentDashboard = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1 className="student-dashboard">Student Dashboard</h1>
+    <div className="student-dashboard" style={{ padding: "20px" }}>
+      <h1>Student Dashboard</h1>
       <p>Welcome, Student! Scan the QR code to mark your attendance.</p>
 
       <button
