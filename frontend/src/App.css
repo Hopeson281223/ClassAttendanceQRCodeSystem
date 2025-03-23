@@ -423,8 +423,8 @@ input:focus, select:focus {
 }
 
 .student-dashboard .camera-container video {
-  width: 50%; /* Make video fill the container */
-  height: 50%; /* Make video fill the container */
+  width: 70%; /* Make video fill the container */
+  height: 80%; /* Make video fill the container */
   object-fit: cover; /* Ensure video covers the container */
   border-radius: 8px; /* Match container's border radius */
   display: block; /* Ensure the video behaves as a block element */
@@ -432,8 +432,8 @@ input:focus, select:focus {
 }
 
 .student-dashboard .qr-reader {
-  width: 50%; /* Make QR reader fill the container */
-  height: 50%; /* Make QR reader fill the container */
+  width: 70%; /* Make QR reader fill the container */
+  height: 80%; /* Make QR reader fill the container */
   object-fit: cover; /* Ensure QR reader covers the container */
   border-radius: 8px; /* Match container's border radius */
   display: block; /* Ensure the QR reader behaves as a block element */
@@ -475,13 +475,13 @@ input:focus, select:focus {
   }
 
   .student-dashboard .camera-container video {
-    width: 50%; /* Adjust video width for smaller screens */
-    height: 50%; /* Adjust video height for smaller screens */
+    width: 70%; /* Adjust video width for smaller screens */
+    height: 80%; /* Adjust video height for smaller screens */
   }
 
   .student-dashboard .qr-reader {
-    width: 50%; /* Adjust QR reader width for smaller screens */
-    height: 50%; /* Adjust QR reader height for smaller screens */
+    width: 70%; /* Adjust QR reader width for smaller screens */
+    height: 80%; /* Adjust QR reader height for smaller screens */
   }
 }
 
