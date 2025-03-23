@@ -249,11 +249,6 @@ input:focus, select:focus {
     text-align: center;
   }
 
-  .admin-dashboard .logout-btn {
-    width: 100%;
-    text-align: center;
-  }
-
   .admin-dashboard th, td {
     padding: 8px;
     font-size: 14px; /* Reduce font size for smaller screens */
@@ -423,7 +418,7 @@ input:focus, select:focus {
 
 .student-dashboard .camera-container video {
   width: 70%; /* Make video fill the container */
-  height: 70%; /* Make video fill the container */
+  height: 60%; /* Make video fill the container */
   object-fit: cover; /* Ensure video covers the container */
   border-radius: 8px; /* Match container's border radius */
   display: block; /* Ensure the video behaves as a block element */
@@ -432,7 +427,7 @@ input:focus, select:focus {
 
 .student-dashboard .qr-reader {
   width: 70%; /* Make QR reader fill the container */
-  height: 70%; /* Make QR reader fill the container */
+  height: 60%; /* Make QR reader fill the container */
   object-fit: cover; /* Ensure QR reader covers the container */
   border-radius: 8px; /* Match container's border radius */
   display: block; /* Ensure the QR reader behaves as a block element */
@@ -453,7 +448,6 @@ input:focus, select:focus {
 
 .student-dashboard .success-message {
   color: green;
-  margin-top: 10px;
 }
 
 .student-dashboard .error-message {
@@ -472,6 +466,16 @@ input:focus, select:focus {
     aspect-ratio: 16 / 9; /* Adjust aspect ratio for mobile */
   }
 
+  .student-dashboard .camera-container video {
+    width: 70%; 
+    height: 70%; 
+  }
+  
+  .student-dashboard .qr-reader {
+    width: 70%; 
+    height: 70%;
+  }
+  
 }
 
 @media (max-width: 480px) {

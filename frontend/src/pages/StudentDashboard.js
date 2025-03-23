@@ -81,7 +81,7 @@ const StudentDashboard = () => {
       console.log("User Info:", user);
 
       const response = await axios.post(
-        "http://localhost:5000/api/attendance",
+        "https://classattendanceqrcodesystem.onrender.com/api/attendance",
         { session_id },
         {
           headers: {
