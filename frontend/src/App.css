@@ -365,7 +365,7 @@ input:focus, select:focus {
   height: auto; /* Adjust height automatically */
   aspect-ratio: 4 / 3; /* Maintain aspect ratio (4:3 for video) */
   margin: 0 auto; /* Center the container */
-  padding: 5px;
+  padding: 6px;
   background-color: white;
   border-radius: 8px;
   overflow: hidden; /* Ensure nothing overflows the container */
