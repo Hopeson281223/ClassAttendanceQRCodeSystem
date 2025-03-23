@@ -181,10 +181,16 @@ input:focus, select:focus {
   background-color: #a71d2a;
 }
 
+.admin-dashboard .table-container {
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
+  margin: 20px auto;
+}
+
 .admin-dashboard table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px auto;
+  min-width: 600px; /* Set a minimum width for the table */
 }
 
 .admin-dashboard table, th, td {
@@ -221,6 +227,45 @@ input:focus, select:focus {
 .admin-dashboard .error {
   color: red;
   text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 15px;
+  }
+
+  .admin-dashboard h1 {
+    font-size: 20px;
+  }
+
+  .admin-dashboard nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .admin-dashboard .nav-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .admin-dashboard .logout-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .admin-dashboard th, td {
+    padding: 8px;
+    font-size: 14px; /* Reduce font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-dashboard th, td {
+    padding: 6px;
+    font-size: 12px; /* Further reduce font size for very small screens */
+  }
 }
 
 /* Instructor Dashboard */
@@ -430,13 +475,13 @@ input:focus, select:focus {
   }
 
   .student-dashboard .camera-container video {
-    width: 60%; /* Adjust video width for smaller screens */
-    height: 80%; /* Adjust video height for smaller screens */
+    width: 50%; /* Adjust video width for smaller screens */
+    height: 50%; /* Adjust video height for smaller screens */
   }
 
   .student-dashboard .qr-reader {
-    width: 60%; /* Adjust QR reader width for smaller screens */
-    height: 80%; /* Adjust QR reader height for smaller screens */
+    width: 50%; /* Adjust QR reader width for smaller screens */
+    height: 50%; /* Adjust QR reader height for smaller screens */
   }
 }
 
