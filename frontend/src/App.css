@@ -376,7 +376,7 @@ input:focus, select:focus {
   justify-content: center;
   margin-bottom: 5px;
 }
-
+/*
 .student-dashboard .camera-container video {
   position: relative;
   top: 1;
@@ -431,7 +431,7 @@ input:focus, select:focus {
   margin-top: 10px;
 }
 
-/* Responsive Design */
+// Responsive Design 
 @media (max-width: 768px) {
   .student-dashboard {
     width: 90%;
@@ -439,8 +439,8 @@ input:focus, select:focus {
   }
 
   .student-dashboard .camera-container {
-    max-width: 100%; /* Allow it to take full width on smaller screens */
-    aspect-ratio: 16 / 9; /* Adjust aspect ratio for mobile */
+    max-width: 100%; // Allow it to take full width on smaller screens 
+    aspect-ratio: 16 / 9; // Adjust aspect ratio for mobile 
   }
 
   .student-dashboard .camera-container video {
@@ -451,6 +451,8 @@ input:focus, select:focus {
 
 @media (max-width: 480px) {
   .student-dashboard .camera-container {
-    aspect-ratio: 1 / 1; /* Square aspect ratio for very small screens */
+    aspect-ratio: 1 / 1; /* Square aspect ratio for very small screens 
   }
 }
+
+*/
