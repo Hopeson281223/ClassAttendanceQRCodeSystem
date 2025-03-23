@@ -78,6 +78,7 @@ input:focus, select:focus {
   margin-bottom: 20px;
 }
 
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
@@ -424,5 +425,6 @@ input:focus, select:focus {
 @media (max-width: 480px) {
   .student-dashboard .camera-container {
     height: 200px;
+    
   }
 }
