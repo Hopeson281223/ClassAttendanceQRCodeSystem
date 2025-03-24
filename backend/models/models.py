@@ -69,7 +69,7 @@ class Attendance(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.String(50), db.ForeignKey("users.user_id"), nullable=False)  
-    session_id = db.Column(db.String(5), db.ForeignKey("sessions.session_id"), nullable=False)  # Corrected foreign key
+    session_id = db.Column(db.String(5), db.ForeignKey("sessions.session_id"), nullable=False)  
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
