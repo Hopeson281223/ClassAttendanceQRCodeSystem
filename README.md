@@ -14,7 +14,7 @@ The **QR Code Class Attendance System** is a web-based application that allows i
 - Python
 - Flask
 - Flask-CORS
-- SQLAlchemy (for database management)
+- SQLAlchemy (for database management) + PostgreSQL
 - Alembic (for database migrations)
 - QR Code library  `qrcode` Python package
 
